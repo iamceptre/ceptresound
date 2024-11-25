@@ -1,0 +1,29 @@
+---
+import Time from './Time.tsx'
+---
+
+<hr>
+<footer>
+    <div class="current-year">@2024</div>
+    <section class="info-wrapper">
+        <Time client:visible />
+        <div>Łódź, Poland</div>
+    </section>
+</footer>
+
+<style>
+    footer {
+        display: flex;
+        justify-content: space-between;
+        font-size: var(--size-400);
+    }
+
+    .current-year {
+        color: var(--cl-grey-800);
+    }
+
+    .info-wrapper {
+        display: flex;
+        gap: 1rem;
+    }
+</style>

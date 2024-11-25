@@ -1,0 +1,185 @@
+---
+const currentPath = Astro.url.pathname;
+const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about/', label: 'About' },
+    { href: '/projects/', label: 'Projects' },
+];
+
+import CopyToClipboard from "./CopyToClipboard"
+---
+
+<header>
+    <div class="logo">
+        <a href="https://linktr.ee/ceptre"><img src="/ceptre-logo.png" alt="ceptre logo" /></a>
+        <div>
+            <span><a href="https://linktr.ee/ceptre">Łukasz Brandeburg</a></span>
+            <span>Sound Designer | Music Producer | Composer</span>
+        </div>
+    </div>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-button-wrapper">
+        <div class="menu-button"></div>
+    </label>
+    <nav>
+        {navLinks.map(link => (
+            <a 
+                href={link.href} 
+                class={currentPath === link.href ? 'active' : ''}
+            >
+                {link.label}
+            </a>
+        ))}
+    </nav>
+    <div class="email-wrapper">
+        <CopyToClipboard client:visible/>
+    </div>
+</header>
+<hr>
+<style>
+    header {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: var(--size-500);
+        align-items: center;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .active {
+        font-weight: 700;
+    }
+
+    .menu-button-wrapper {
+        display: none;
+        justify-content: flex-end;
+        z-index: 10;
+    }
+
+    .menu-button-wrapper:hover {
+        cursor: pointer;
+    }
+
+    .menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5rem;
+        height: 1rem;
+    }
+
+    .menu-button::before,
+    .menu-button::after {
+        display: block;
+        background-color: hsl(0, 0%, 0%);
+        position: absolute;
+        height: 2px;
+        width: 1.25rem;
+        transition: transform 0.15s;
+    }
+
+    .menu-button::before {
+        content: '';
+        margin-top: -8px;
+    }
+
+    .menu-button::after {
+        content: '';
+        margin-top: 8px;
+    }
+
+    #menu-toggle:checked + .menu-button-wrapper .menu-button::before {
+        margin-top: 0;
+        transform: rotate(45deg);
+    }
+
+    #menu-toggle:checked + .menu-button-wrapper .menu-button::after {
+        margin-top: 0;
+        transform: rotate(-45deg);
+    }
+
+    .email-wrapper {
+        text-align: end;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--size-500);
+    }
+
+    .logo img {
+        max-width: 2rem;
+        height: 2rem;
+    }
+
+    .logo > div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logo > div > span:nth-child(2) {
+        color: var(--cl-grey-800);
+        font-size: var(--size-300);
+    }
+
+    #menu-toggle {
+        display: none;
+    }
+
+    @media screen and (max-width: 30rem) {
+        .logo > div > span:nth-child(2) {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 60rem) {
+        header {
+            grid-template-columns: 1fr min-content;
+            gap: 1rem;
+        }
+
+        nav {
+            flex-direction: column;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            right: -100%;
+            top: 0;
+            background-color: var(--cl-bg);
+            transition: 0.15s ease all;
+        }
+
+        .menu-button-wrapper {
+            display: block;
+        }
+        
+        #menu-toggle:checked ~ nav {
+            right: 0;
+        }
+
+        .email-wrapper {
+            display: none;
+        }
+	}
+</style>
+<script>
+    const checkbox = document.getElementById('menu-toggle') as HTMLInputElement | null
+    checkbox?.addEventListener('change', function () {
+        if (checkbox.checked) {
+            document.documentElement.style.overflow = 'hidden'
+        } else {
+            document.documentElement.style.overflow = ''
+        }
+        window.scrollTo({top: -1, behavior: 'smooth'})
+    })
+</script>

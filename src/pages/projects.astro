@@ -1,0 +1,183 @@
+---
+import Head from '../components/Head.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { SITE_TITLE } from '../config'
+
+const allProjects = (await Astro.glob('./projects/*.md'))
+
+const groupProjectsByTag = (projects: any[]) => {
+  const grouped: Record<string, any[]> = {}
+  projects.forEach((project) => {
+    const tag = project.frontmatter.tag
+    if (!grouped[tag]) grouped[tag] = []
+    grouped[tag].push(project)
+  })
+  return grouped
+}
+
+const categoryOrder = ['Sound Design', 'Music', 'Visual Design'];
+
+const groupedProjects = groupProjectsByTag(allProjects)
+
+Object.keys(groupedProjects).forEach((tag) => {
+  groupedProjects[tag].sort((a, b) => 
+    new Date(b.frontmatter.createdAt).valueOf() - new Date(a.frontmatter.createdAt).valueOf()
+  )
+})
+
+const formatLabel = (tag: string): string => {
+  return tag
+    .replace(/-+/g, ' ')
+    .replace(/\b\w/g, char => char.toUpperCase())
+}
+
+const sections = Object.entries(groupedProjects).map(([tag, projects]: [string, any[]]) => ({
+  id: tag.toLowerCase().replace(/\s+/g, '-'),
+  label: formatLabel(tag),
+  projects,
+}))
+
+sections.sort((a, b) => {
+  const indexA = categoryOrder.indexOf(a.label);
+  const indexB = categoryOrder.indexOf(b.label);
+  return indexA - indexB
+})
+---
+
+<html lang="en">
+	<Head title={SITE_TITLE}></Head>
+	<body>
+		<section class="main-wrapper">
+			<Header></Header>
+			<main>
+				<div>
+					{sections.map(({ id, label }, index) => (
+						<>
+							<a href={`#${id}`}>{label}</a>
+							<span class="pipe-symbol">{index < sections.length - 1 && '|'}</span>
+						</>
+					))}
+				</div>
+				<div><hr></div>
+				{sections.map(({ id, label, projects }) => (
+				<section id={id}>
+					<div class="category">{label}</div>
+					<div class="projects">
+						{projects.map((project: any) => {
+							const heroImageSrc =  project.frontmatter.heroImage
+							return (
+							<div class="project">
+								<a href={project.url}>
+									<img src={heroImageSrc} alt="d"/>
+									<div class="info-wrapper">
+										<div>{project.frontmatter.title}</div>
+										<div>
+											<div>{project.frontmatter.date}</div>
+											<div>({project.frontmatter.category})</div>
+										</div>
+									</div>
+								</a>
+							</div>
+							)
+						})}
+					</div>
+				</section>
+				))}
+			</main>
+			<Footer></Footer>
+		</section>
+	</body>
+</html>
+
+<style>
+	html {
+		scroll-behavior: smooth;
+	}
+
+	main {
+		align-content: space-evenly;
+		max-width: 60rem;
+		margin-inline: auto;
+	}
+
+	a {
+        text-decoration: none;
+        color: black;
+    }
+
+	main > div:nth-child(1) {
+		display: flex;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.projects {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--size-700);
+	}
+
+	.category {
+		color: var(--cl-grey-800);
+		margin-block: 3rem;
+	}
+
+	.project {
+		display: flex;
+		flex-direction: column;
+		background-color: var(--cl-bg-secondary);
+	}
+
+	.project img {
+		aspect-ratio: 5 / 3;
+		object-fit: cover;
+	}
+
+	.project img:hover {
+		cursor: pointer;
+	}
+
+	.project > a {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.info-wrapper {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 1rem;
+		gap: var(--size-700);
+	}
+
+	.info-wrapper > div:last-child {
+		display: flex;
+    	justify-content: space-between;
+		font-size: var(--size-400);
+		color: var(--cl-grey-800);
+	}
+
+	@media screen and (max-width: 60rem) {
+		.projects {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media screen and (max-width: 35rem) {
+		.projects {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media screen and (max-width: 22.3rem) {
+		.pipe-symbol {
+			display: none;
+		}
+		main > div:nth-child(1) {
+			flex-direction: column;
+		}
+	}
+</style>

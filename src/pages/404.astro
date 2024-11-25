@@ -1,0 +1,51 @@
+---
+import Head from '../components/Head.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { SITE_TITLE } from '../config'
+---
+
+<html lang="en">
+	<Head title={SITE_TITLE}></Head>
+	<body>
+		<section class="main-wrapper">
+			<Header></Header>
+			<main>
+                <div>
+                    <span>SEEMS LIKE YOU GOT LOST :(</span>
+                    <span>back to <a href="/">main page</a></span>
+                </div>
+				<div>
+                    <img src="/dister.gif" alt='dister'/>
+                </div>
+			</main>
+			<Footer></Footer>
+		</section>
+	</body>
+</html>
+
+<style>
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    main > div:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        font-weight: 600;
+    }
+
+    @media screen and (max-width: 30rem) {
+        main {
+            flex-direction: column;
+        }
+    }
+</style>

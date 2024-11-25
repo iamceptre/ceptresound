@@ -1,0 +1,86 @@
+---
+import Head from '../components/Head.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { SITE_TITLE } from '../config'
+import { Image } from 'astro:assets'
+import hero from '../../public/hero.jpg'
+---
+
+<html lang="en">
+	<Head title={SITE_TITLE}></Head>
+	<body>
+		<section class="main-wrapper">
+			<Header></Header>
+			<main>
+				<div>
+					<div>
+						I merge storytelling with sound to evoke emotions and resonate deeply in any creative experience.
+					</div>
+					<section class="info-wrapper">
+						<div>
+							<div class="category">Sound / Music</div>
+							<span>Ableton, Reaper, Nuendo</span>
+						</div>
+						<div>
+							<div class="category">Graphics Design</div>
+							<span>Adobe Photoshop, Adobe After Effects, Blender</span>
+						</div>
+						<div>
+							<div class="category">Game Development</div>
+							<span>Unity, C#, Fmod, Wwise, GitHub</span>
+						</div>
+					</section>
+				</div>
+				<div>
+					<Image src={hero} width={720} alt="hero image" quality={90} />
+				</div>
+			</main>
+			<Footer></Footer>
+		</section>
+	</body>
+</html>
+
+<style>
+	main {
+		display: grid;
+		grid-template-columns: auto auto;
+		align-items: center;
+		gap: var(--size-900);
+		max-width: 45rem;
+		margin-inline: auto;
+	}
+
+	main > div {
+		display: grid;
+		gap: var(--size-900);
+	}
+
+	.info-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.category {
+		color: var(--cl-grey-800);
+	}
+
+	@media screen and (max-width: 60rem) {
+		main {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: var(--size-700);
+			max-width: 20rem;
+		}
+
+		main > div {
+			gap: var(--size-700);
+		}
+
+		img {
+			width: 320px;
+		}
+	}
+</style>

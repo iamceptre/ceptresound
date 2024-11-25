@@ -1,0 +1,135 @@
+---
+import Head from '../components/Head.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { SITE_TITLE } from '../config'
+import { Image } from 'astro:assets'
+import hero from '../../public/about.jpg'
+---
+
+<html lang="en">
+	<Head title={SITE_TITLE}></Head>
+	<body>
+		<section class="main-wrapper">
+			<Header></Header>
+			<main>
+				<div class="about">
+					<div class="hero-img">
+						<Image src={hero} width={720} alt="hero image" quality={90} />
+					</div>
+					<section class="info-wrapper">
+						<div>łukasz brandeburg</div>
+						<div class="desc">
+							<div>
+								I'm a passionate sound designer and music producer with experience dating back to 2014.
+							</div>
+							<div>
+								I'm fascinated with telling stories with the deepest and most meaningful audio I can make. Game Development was what brought me to the world of sound creation.
+							</div>
+							<div>
+								I love creating and implementing soundscapes for games and making the experience full of the intended emotions of a given project.
+							</div>
+							<div>
+								I'm using cutting-edge technologies to deliver the most interesting and captivating sound.
+							</div>
+							<div>
+								I also have experience designing and coding video games and working on visuals for them, which allows me to deeply understand and communicate with the development team.
+							</div>
+							<div>
+								Music Genres I'm experienced in writing the most are:
+								Drum and Bass, Electronic, Ambient and Dubstep.
+							</div>
+							<div>
+								I work mainly using electronic sound and orchestral instrumentation every so often.
+							</div>
+						</div>
+					</section>
+				</div>
+				<div><hr></div>
+				<div>
+					<div class="achievements">
+						Achievements:
+						<div>
+							Gathered a reputable musical fanbase.
+						</div>
+						<div>
+							Got signed with highly reputable music labels.
+						</div>
+						<div>
+							Released two successful electronic sample packs.
+						</div>
+						<div>
+							Appeared at Noisia's Vision Radio.
+						</div>
+						<div>
+							Got booked internationally to play as a DJ.
+						</div>
+					</div>
+				</div>
+			</main>
+			<Footer></Footer>
+		</section>
+	</body>
+</html>
+
+<style>
+	main {
+		align-content: space-evenly;
+		max-width: 45rem;
+		margin-inline: auto;
+	}
+
+	.about {
+		display: grid;
+		grid-template-columns: auto auto;
+		gap: var(--size-900);
+	}
+
+	.achievements {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: var(--size-900);
+		row-gap: var(--size-500);
+		color: var(--cl-grey-800);
+	}
+
+	.info-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.info-wrapper > div:nth-child(1) {
+		color: var(--cl-grey-800);
+	}
+
+	.desc > * {
+		margin-bottom: 1rem;
+	}
+
+	.category {
+		color: var(--cl-grey-800);
+	}
+
+	@media screen and (max-width: 60rem) {
+		.about {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			max-width: 20rem;
+		}
+
+		main > div {
+			gap: var(--size-700);
+		}
+
+		.achievements {
+			display: flex;
+			flex-direction: column;
+		}
+
+		img {
+			width: 320px;
+		}
+	}
+</style>

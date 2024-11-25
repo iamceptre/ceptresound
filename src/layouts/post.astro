@@ -1,0 +1,68 @@
+---
+import Head from '../components/Head.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { SITE_TITLE } from '../config'
+import { Image } from 'astro:assets'
+
+export interface Props {
+  content: {
+    title: string
+	heroImage?: string
+  }
+}
+
+const {
+  content: { title, heroImage }
+} = Astro.props
+---
+
+<html lang="en">
+	<Head title={title + ` / ${SITE_TITLE}`}></Head>
+	<body>
+		<section class="main-wrapper">
+			<Header></Header>
+			<main>
+				<div>
+					{
+						heroImage && (
+						  <Image
+							width={576}
+							height={320}
+							src={heroImage}
+							quality={70}
+							alt=""
+						  />
+						)
+					  }
+				</div>
+				<div class="title">{title}</div>
+				<hr>
+        		<slot></slot>
+			</main>
+			<Footer></Footer>
+		</section>
+	</body>
+</html>
+
+<style>
+	main {
+		max-width: 45rem;
+		margin-inline: auto;
+	}
+
+	.title {
+		font-size: var(--size-700);
+		margin-top: 1rem;
+	}
+
+	main > div:nth-child(1) {
+		display: flex;
+		justify-content: center;
+	}
+
+	img {
+		aspect-ratio: 5 / 3;
+		object-fit: cover;
+	}
+</style>
