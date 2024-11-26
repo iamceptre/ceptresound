@@ -16,7 +16,7 @@ const groupProjectsByTag = (projects: any[]) => {
   return grouped
 }
 
-const categoryOrder = ['Sound Design', 'Music', 'Visual Design'];
+const categoryOrder = ['Game Development','Sound Design', 'Music', 'Visual Design'];
 
 const groupedProjects = groupProjectsByTag(allProjects)
 
@@ -65,11 +65,11 @@ sections.sort((a, b) => {
 					<div class="category">{label}</div>
 					<div class="projects">
 						{projects.map((project: any) => {
-							const heroImageSrc =  project.frontmatter.heroImage
+							const thumbnailSrc = project.frontmatter.thumbnail
 							return (
 							<div class="project">
 								<a href={project.url}>
-									<img src={heroImageSrc} alt="d"/>
+									<img src={thumbnailSrc} alt="d"/>
 									<div class="info-wrapper">
 										<div>{project.frontmatter.title}</div>
 										<div>
@@ -172,7 +172,7 @@ sections.sort((a, b) => {
 		}
 	}
 
-	@media screen and (max-width: 22.3rem) {
+	@media screen and (max-width: 35rem) {
 		.pipe-symbol {
 			display: none;
 		}

@@ -1,0 +1,36 @@
+---
+import Head from '../components/Head.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import { SITE_TITLE } from '../config'
+
+const video = 'public/projects/no-eyes.mp4'
+---
+<html lang="en">
+	<Head title={SITE_TITLE}></Head>
+	<body>
+		<section class="main-wrapper">
+			<Header></Header>
+			<main>
+                <video controls class="responsive-video">
+                    <source src={video} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+			</main>
+			<Footer></Footer>
+		</section>
+	</body>
+</html>
+
+<style>
+    main {
+        display: grid;
+        place-content: center;
+    }
+
+    .responsive-video {
+        width: 62vw;
+        max-width: 100%;
+        height: auto;
+    }
+</style>

@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/post.astro
 tag: visual-design
+thumbnail: /projects/OIP.jpg
 heroImage: /projects/OIP.jpg
 title: hello
 category: visual design

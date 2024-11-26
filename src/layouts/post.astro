@@ -9,11 +9,14 @@ export interface Props {
   content: {
     title: string
 	heroImage?: string
+	video?: string
   }
 }
 
+
 const {
-  content: { title, heroImage }
+	
+  content: { title, heroImage, video }
 } = Astro.props
 ---
 
@@ -27,14 +30,22 @@ const {
 					{
 						heroImage && (
 						  <Image
-							width={576}
+							width={611}
 							height={320}
 							src={heroImage}
 							quality={70}
 							alt=""
 						  />
-						)
+						)	
 					  }
+					  {
+						video && (
+						<video controls autoplay width="611">
+						  <source src={video} type="video/mp4" />
+						  Your browser does not support the video tag.
+						</video>
+						)
+						}
 				</div>
 				<div class="title">{title}</div>
 				<hr>
@@ -47,10 +58,9 @@ const {
 
 <style>
 	main {
-		max-width: 45rem;
+		max-width: 38.2rem;
 		margin-inline: auto;
 	}
-
 	.title {
 		font-size: var(--size-700);
 		margin-top: 1rem;
@@ -65,4 +75,45 @@ const {
 		aspect-ratio: 5 / 3;
 		object-fit: cover;
 	}
+	:global(a){
+		text-decoration-style: solid;
+		color: black;
+	}
 </style>
+
+<style>
+	.video-container {
+	  display: flex;
+	  justify-content: center;
+	  margin: 1rem 0;
+	}
+  
+	.video-container iframe {
+	  width: 100%;
+	  max-width: 560px;
+	  height: 315px;
+	}
+  </style>
+  
+  <style>
+	.video-wrapper {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  margin: 1rem 0;
+	}
+  
+	iframe {
+	  width: 560px;
+	  height: 315px;
+	  border: none;
+	}
+  
+	@media (max-width: 600px) {
+	  iframe {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16/9;
+	  }
+	}
+  </style>

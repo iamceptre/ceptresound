@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/post.astro
 tag: music
-heroImage: /projects/proxy-image.png
+thumbnail: /projects/OIP.jpg
 title: yo?
 category: music
 date: since 2013
