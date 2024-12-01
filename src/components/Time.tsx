@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 const Time: React.FC = () => {
-    const [currentTime, setCurrentTime] = useState<string>('')
+    const [currentTime, setCurrentTime] = useState<string>('12:00')
     const updateTime = () => {
         const date = new Date();
         const options: Intl.DateTimeFormatOptions = {
@@ -16,7 +16,7 @@ const Time: React.FC = () => {
         updateTime()
         const interval = setInterval(() => {
             updateTime()
-        }, 1000)
+        }, 5000)
         return () => clearInterval(interval);
     }, [])
     return <div className="time">{currentTime}</div>

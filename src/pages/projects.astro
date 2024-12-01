@@ -124,10 +124,26 @@ sections.sort((a, b) => {
 	}
 
 	.project {
+		/*position: relative;*/
 		display: flex;
 		flex-direction: column;
 		background-color: var(--cl-bg-secondary);
 	}
+
+	/*.thumbnail::before {
+		content: '';
+		background-image: url(../../public/dister.gif);
+		top: 0;
+		left: 0;
+		width: 10%;
+		height: 10%;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		transform: translate(50%, 50%);
+		z-index: 1;
+		position: absolute;
+	}*/
 
 	.project img {
 		aspect-ratio: 5 / 3;

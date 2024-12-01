@@ -175,11 +175,19 @@ import CopyToClipboard from "./CopyToClipboard"
 </style>
 <script>
     const checkbox = document.getElementById('menu-toggle') as HTMLInputElement | null
+    const videos = document.getElementsByTagName('video') as HTMLCollectionOf<HTMLVideoElement>
+    
     checkbox?.addEventListener('change', function () {
         if (checkbox.checked) {
             document.documentElement.style.overflow = 'hidden'
+            for (let video of videos) {
+                video.style.zIndex = "-1"
+            }
         } else {
             document.documentElement.style.overflow = ''
+            for (let video of videos) {
+                video.style.zIndex = "0"
+            }
         }
         window.scrollTo({top: -1, behavior: 'smooth'})
     })

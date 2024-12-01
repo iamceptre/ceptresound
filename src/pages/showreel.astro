@@ -3,8 +3,6 @@ import Head from '../components/Head.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { SITE_TITLE } from '../config'
-
-const video = '../../public/projects/no-eyes.mp4'
 ---
 <html lang="en">
 	<Head title={SITE_TITLE}></Head>
@@ -12,8 +10,8 @@ const video = '../../public/projects/no-eyes.mp4'
 		<section class="main-wrapper">
 			<Header></Header>
 			<main>
-                <video controls class="responsive-video">
-                    <source src='../../public/projects/no-eyes.mp4' type="video/mp4" />
+                <video controls class="responsive-video" class="video-showrell">
+                    <source src='../../public/placeholder.mp4' type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
 			</main>
