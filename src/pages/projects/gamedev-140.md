@@ -4,6 +4,7 @@ tag: game-development
 thumbnail: /projects/thumb-140.png
 heroImage: /projects/hero-140.png
 title: 140
+footerVideo: /projects/no-eyes.mp4
 category: game development
 date: 24th October 2022
 createdAt: 2022/10/25
@@ -23,6 +24,3 @@ You can <a href="https://kyroshie.itch.io/140">Download the Game here</a>
 <br>
 
 Sound Design Demo Video:
-<div class ="yt-frame">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_S-xJegY74M?si=eY65yfPsI0cOY_2W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>

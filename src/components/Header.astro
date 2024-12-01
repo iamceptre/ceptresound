@@ -181,12 +181,12 @@ import CopyToClipboard from "./CopyToClipboard"
         if (checkbox.checked) {
             document.documentElement.style.overflow = 'hidden'
             for (let video of videos) {
-                video.style.zIndex = "-1"
+                video.classList.add('zindex-video')
             }
         } else {
             document.documentElement.style.overflow = ''
             for (let video of videos) {
-                video.style.zIndex = "0"
+                video.classList.remove('zindex-video')
             }
         }
         window.scrollTo({top: -1, behavior: 'smooth'})

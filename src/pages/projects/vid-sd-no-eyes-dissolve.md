@@ -3,6 +3,7 @@ layout: ../../layouts/post.astro
 tag: sound-design
 thumbnail: /projects/thumb-no-eyes-play.jpg
 title: Hollow Knight Boss Dissolve
+footerVideo: 
 category: sound redesign
 date: 22th november 2024
 createdAt: 2024/11/22
