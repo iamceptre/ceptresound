@@ -39,7 +39,7 @@ const {
 					}
 					{
 						video && (
-						<video controls width="611">
+						<video controls width="611" poster="/black-16-9.png">
 						  <source src={video} type="video/mp4" />
 						  Your browser does not support the video tag.
 						</video>
@@ -51,7 +51,7 @@ const {
         		<slot></slot>
 				{
 					footerVideo && (
-					<video controls width="611" class="footer-video">
+					<video controls width="611" class="footer-video" poster="/black-16-9.png">
 					  <source src={footerVideo} type="video/mp4" />
 					  Your browser does not support the video tag.
 					</video>
