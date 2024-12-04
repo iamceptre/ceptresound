@@ -3,7 +3,7 @@ layout: ../../layouts/post.astro
 tag: music
 thumbnail: /projects/thumb-ceptre.webp
 heroImage: /projects/hero-ceptre.png
-title: Running Music Project "Ceptre"
+title: Music Project "Ceptre"
 video:
 footerVideo: 
 category: music creation
