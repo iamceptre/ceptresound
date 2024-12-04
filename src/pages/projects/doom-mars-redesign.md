@@ -11,7 +11,12 @@ date: 5th Nov 2024
 createdAt: 2024/11/05
 ---
 <div>
-BOOOOOOOOOOOOOOOOOOOOOOOOM :)))
+This Redesign is a part of my 2024 Noisevember, Day 28: Resonant
+</div>
+<br>
+<div>
+Today’s prompt presented by BFG 10000 Mars Destruction Scene from DOOM Eternal<br>
+I tried to use as many resonant elements as possible; I built most of the sounds using recordings of big metal charity containers.
 </div>
 <br>
 <div>
