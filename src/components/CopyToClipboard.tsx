@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const CopyToClipboard = () => {
     const [color, setColor] = useState('black');
-    const [isTooltipVisible, setTooltipVisible] = useState(false);
+    const [tooltipState, setTooltipState] = useState<'hidden' | 'visible' | 'fading'>('hidden');
 
     const handleCopy = async () => {
         const emailText = document.querySelector('.email')?.textContent;
@@ -10,13 +10,17 @@ const CopyToClipboard = () => {
 
         try {
             await navigator.clipboard.writeText(emailText);
-            setColor('hsl(95, 50%, 30%)');
-            setTooltipVisible(true);
+
+            setColor('#BDBDBD');
+            setTooltipState('visible');
 
             setTimeout(() => {
+                setTooltipState('fading');
                 setColor('black');
-                setTooltipVisible(false);
-            }, 1500);
+                setTimeout(() => {
+                    setTooltipState('hidden');
+                }, 500);
+            }, 1000);
         } catch (error) {
             console.error('Failed to copy text:', error);
         }
@@ -25,19 +29,31 @@ const CopyToClipboard = () => {
     const emailStyle = {
         color,
         cursor: 'pointer',
-        transition: 'color 0.2s ease',
+        transition: tooltipState === 'fading' ? 'color 0.5s ease' : 'color 0.166s ease', 
     };
 
     const tooltipStyle = {
         position: 'absolute' as const,
         top: '-25px',
         left: '0',
-        background: '#141414',
+        background: '#737473',
         color: '#fff',
         padding: '4px 8px',
         borderRadius: '4px',
         fontSize: '12px',
         whiteSpace: 'nowrap',
+        opacity:
+            tooltipState === 'hidden'
+                ? 0
+                : tooltipState === 'visible'
+                ? 1
+                : tooltipState === 'fading'
+                ? 0
+                : 0,
+        transition:
+            tooltipState === 'visible'
+                ? 'opacity 0.166s ease'
+                : 'opacity 0.5s ease',
     };
 
     return (
@@ -52,11 +68,7 @@ const CopyToClipboard = () => {
             >
                 brandeburglukasz@gmail.com
             </span>
-            {isTooltipVisible && (
-                <div style={tooltipStyle}>
-                    Mail copied!
-                </div>
-            )}
+            {tooltipState !== 'hidden' && <div style={tooltipStyle}>Mail copied!</div>}
         </div>
     );
 };
