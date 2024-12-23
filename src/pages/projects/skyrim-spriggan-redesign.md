@@ -38,5 +38,10 @@ createdAt: 2024/11/19
 
 <p>The challenge was transforming raw, dry recordings into something vivid and powerful. Layering and processing were vital, but it was a delicate balance—push too far, and it all starts sounding off and ugly. Finding a sweet spot for every knob took quite some time and patience.</p>
 
-<p><i>Noisevember</i> is a creative challenge hosted by <a href="https://www.airwiggles.com" target="_blank" rel="noopener noreferrer">airwiggles.com</a>, where participants create and share one sound or piece of audio every day in November.</p>
+<div>
+  This redesign is a part of my 2024 Noisevember, Day 19: Plant-Based.
+</div>
+<div>
+    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one sound or piece of audio every day in November.</i>
+</div>
 

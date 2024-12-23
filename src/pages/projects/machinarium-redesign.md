@@ -10,19 +10,27 @@ category: music & sound redesign
 date: 6th Nov 2024
 createdAt: 2024/11/06
 ---
-<div>
-This Redesign is a part of my 2024 Noisevember, Day 06: Pressure
-</div>
+
+
+<h2>🔩 Pressure Soundscape</h2>
+
+<p>Every element in today’s redesign is built upon different "pressure" recordings:</p>
+<ul>
+  <li>💨 Valve pressure air bursts</li>
+  <li>🚍 Bus (vehicle) compressors</li>
+  <li>🥤 Soda openings</li>
+</ul>
+
+<p>I also composed the music using only:</p>
+<ul>
+  <li>🔧 Pipe rubbing sounds with high pressure</li>
+  <li>🎚️ Chopped valve hisses</li>
+</ul>
+
+<h3> Game</h3>
+<p>🔩 Machinarium (2009) by Amanita Design 🍄</p>
 <br>
 <div>
-Every element in today’s redesign is built upon different “pressure" recordings, such as valve pressure air bursts, bus(vehicle) compressors, and soda openings.
-I also composed the music using only pipe rubbing sounds with high pressure and chopped valve hisses
+  This redesign is a part of my 2024 Noisevember, Day 06: Pressure.
 </div>
-<br>
-<div>
-Game: 🔩 Machinarium (2009) by Amanita Design 🍄
-</div>
-<br>
-<div>
     <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one sound or piece of audio every day in November.</i>
-</div>
