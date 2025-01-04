@@ -1,139 +1,135 @@
 ---
-import Head from '../components/Head.astro'
-import Header from '../components/Header.astro'
-import Footer from '../components/Footer.astro'
-import { SITE_TITLE } from '../config'
-import { Image } from 'astro:assets'
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../config';
+import { Image } from 'astro:assets';
 
 export interface Props {
   content: {
-    title: string
-	heroImage?: string
-	video?: string
-	footerVideo?: string
-  }
+    title: string;
+    heroImage?: string;
+    video?: string;
+    footerVideo?: string;
+  };
 }
 
 const {
-  content: { title, heroImage, video, footerVideo }
-} = Astro.props
+  content: { title, heroImage, video, footerVideo },
+} = Astro.props;
 ---
 
 <html lang="en">
-	<Head title={title + ` / ${SITE_TITLE}`}></Head>
-	<body>
-		<section class="main-wrapper">
-			<Header></Header>
-			<main>
-				<div>
-					{
-						heroImage && (
-						  <Image
-							width={611}
-							height={320}
-							src={heroImage}
-							quality={70}
-							alt=""
-						  />
-						)	
-					}
-					{
-						video && (
-						<video controls width="611" poster="/black-16-9.png">
-						  <source src={video} type="video/mp4" />
-						  Your browser does not support the video tag.
-						</video>
-						)
-					}
-				</div>
-				<div class="title">{title}</div>
-				<hr>
-        		<slot></slot>
-				{
-					footerVideo && (
-					<video controls width="611" class="footer-video" poster="/black-16-9.png">
-					  <source src={footerVideo} type="video/mp4" />
-					  Your browser does not support the video tag.
-					</video>
-					)
-				}
-				
-			</main>
-			<Footer></Footer>
-		</section>
-	</body>
+  <Head title={title + ` / ${SITE_TITLE}`}></Head>
+  <body>
+    <section class="main-wrapper">
+      <Header></Header>
+      <main>
+        <div class="media-wrapper">
+          {
+            heroImage && (
+              <Image
+                class="hero-image"
+                src={heroImage}
+                width={16} 
+                height={9} 
+                quality={90}
+                alt=""
+              />
+            )
+          }
+          {
+            video && (
+              <video controls class="video" poster="/black-16-9.png">
+                <source src={video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )
+          }
+        </div>
+        <div class="title">{title}</div>
+        <hr>
+        <slot></slot>
+        {
+          footerVideo && (
+            <video controls class="footer-video" poster="/black-16-9.png">
+              <source src={footerVideo} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )
+        }
+      </main>
+      <Footer></Footer>
+    </section>
+  </body>
 </html>
 
 <style>
-	main {
-		max-width: 38.2rem;
-		margin-inline: auto
-	}
-	.title {
-		font-size: var(--size-700);
-		margin-top: 1rem;
-		text-align: center;
-	}
+  main {
+    max-width: 38.2rem;
+    margin-inline: auto;
+  }
 
-	main > div:nth-child(1) {
-		display: flex;
-		justify-content: center;
-	}
+  .title {
+    font-size: var(--size-700);
+    margin-top: 1rem;
+    text-align: center;
+  }
 
-	video {
-		width: 100%;
-	}
+  .media-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 
-	img {
-		aspect-ratio: 5 / 3;
-		object-fit: cover;
-	}
+  .hero-image {
+    width: 100%; /* Full width of the container */
+    height: auto; /* Preserve the aspect ratio */
+    display: block;
+  }
 
+  .video,
+  .footer-video {
+    width: 100%;
+    height: auto;
+  }
 
-	:global(p) {
-		margin-bottom: 1rem;
-	}
+  .footer-video {
+    margin-top: 1rem;
+  }
 
-	:global(h2), :global(h3) {
-		margin-top: 1.5rem;
-		margin-bottom: 0.5rem;
-		font-weight: bold;
-		color: var(--cl-grey-800);
-	}
+  :global(p) {
+    margin-bottom: 1rem;
+  }
 
+  :global(h2), 
+  :global(h3) {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--cl-grey-800);
+  }
 
-	:global(ul), :global(ol) {
-		padding-left: 1.5rem;
-		margin-bottom: 1rem;
-	}
+  :global(ul), 
+  :global(ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
 
-	:global(li) {
-		margin-bottom: 0.5rem;
-	}
+  :global(li) {
+    margin-bottom: 0.5rem;
+  }
 
-	:global(a) {
-		text-decoration-style: solid;
-		color: black;
-	}
+  :global(a) {
+    text-decoration-style: solid;
+    color: black;
+  }
 
-	:global(i) {
-		font-style: italic;
-		color: var(--cl-grey-800);
-	}
-	
-	:global(b) {
-		font-weight: 600;
-	}
+  :global(i) {
+    font-style: italic;
+    color: var(--cl-grey-800);
+  }
 
-	.footer-video {
-		margin-top: 1rem;
-	}
-  
-	@media (max-width: 600px) {
-	  iframe {
-		width: 100%;
-		height: auto;
-		aspect-ratio: 16/9;
-	  }
-	}
+  :global(b) {
+    font-weight: 600;
+  }
 </style>
