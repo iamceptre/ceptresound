@@ -25,6 +25,7 @@ Movie: Eternal Sunshine of the Spotless Mind (2004)
 <div>
 This Redesign is a part of my 2024 Noisevember, Day 28: "?!"
 </div>
+<br>
 <div>
-    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one sound or piece of audio every day in November.</i>
+    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one piece of audio every day in November.</i>
 </div>

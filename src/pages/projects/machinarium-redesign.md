@@ -12,7 +12,7 @@ createdAt: 2024/11/06
 ---
 
 
-<h2>🔩 Pressure Soundscape</h2>
+<h2>Pressure Soundscape</h2>
 
 <p>Every element in today’s redesign is built upon different "pressure" recordings:</p>
 <ul>
@@ -33,4 +33,7 @@ createdAt: 2024/11/06
 <div>
   This redesign is a part of my 2024 Noisevember, Day 06: Pressure.
 </div>
-    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one sound or piece of audio every day in November.</i>
+<br>
+<div>
+    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one piece of audio every day in November.</i>
+</div>

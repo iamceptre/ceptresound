@@ -17,10 +17,10 @@ This Redesign is a part of my 2024 Noisevember, Day 03: Sandwich 🥪
 <div>
 Sound Design for the classic Meet the Sandwich from Team Fortress 2, Valve.
 </div>
-</div>
-<a href="https://youtu.be/_prZ0JrbQrU?si=wzCEurOWFu-_pfGg&t=44" target="_blank" rel="noopener noreferrer">Original Video</a>
-</div>
-<br><br>
 <div>
-    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one sound or piece of audio every day in November.</i>
+<a href="https://youtu.be/_prZ0JrbQrU?si=wzCEurOWFu-_pfGg&t=44">Original Video</a>
+</div>
+<br>
+<div>
+    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one piece of audio every day in November.</i>
 </div>

@@ -82,8 +82,8 @@ const {
   }
 
   .hero-image {
-    width: 100%; /* Full width of the container */
-    height: auto; /* Preserve the aspect ratio */
+    width: 100%;
+    height: auto;
     display: block;
   }
 
@@ -125,11 +125,25 @@ const {
   }
 
   :global(i) {
-    font-style: italic;
-    color: var(--cl-grey-800);
-  }
+  font-style: italic;
+  color: var(--cl-grey-800);
+  display: block;
+  margin-bottom: 0.5rem; 
+}
 
   :global(b) {
     font-weight: 600;
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+      if (link.hostname !== window.location.hostname) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+  });
+</script>
