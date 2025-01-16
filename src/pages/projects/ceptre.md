@@ -8,7 +8,7 @@ video:
 footerVideo: 
 category: music creation
 date: since 2023
-createdAt: 2024/11/22
+createdAt: 2023/11/22
 ---
 <div>
 Ceptre is my personal music project I'm running since early 2023, focusing mainly on Drum & Bass. 
