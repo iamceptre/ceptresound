@@ -3,10 +3,10 @@ layout: ../../layouts/post.astro
 tag: music
 thumbnail: /projects/thumb-budget-repairs-music.webp
 heroImage:
-title: Budget Repairs Job Application Sound Design
+title: Budget Repairs Music
 video: /projects/budget-repairs-music.mp4
 footerVideo: 
-category: sound design application
+category: music
 date: 20th Oct 2024
 createdAt: 2024/10/20
 ---

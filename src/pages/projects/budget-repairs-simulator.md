@@ -6,7 +6,7 @@ heroImage:
 title: Budget Repairs Job Application Sound Design
 video: /projects/budget-repairs.mp4
 footerVideo: 
-category: sound design application
+category: sound design
 date: 20th Oct 2024
 createdAt: 2024/10/20
 ---
