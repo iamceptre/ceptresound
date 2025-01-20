@@ -3,7 +3,7 @@ layout: ../../layouts/post.astro
 tag: sound-design
 thumbnail: /projects/thumb-budget-repairs.webp
 heroImage:
-title: Budget Repairs Job Application Sound Design
+title: Budget Repairs Gameplay Trailer
 video: /projects/budget-repairs.mp4
 footerVideo: 
 category: sound design

@@ -3,7 +3,7 @@ layout: ../../layouts/post.astro
 tag: music
 thumbnail: /projects/thumb-budget-repairs-music.webp
 heroImage:
-title: Budget Repairs Music
+title: Budget Repairs Gameplay Trailer Soundtrack
 video: /projects/budget-repairs-music.mp4
 footerVideo: 
 category: music
