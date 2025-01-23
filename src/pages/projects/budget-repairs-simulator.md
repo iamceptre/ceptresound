@@ -14,6 +14,7 @@ createdAt: 2024/10/20
 <h2>Budget Repairs Sound Design</h2>
 
 <p>For my job application test for <b>Majster Symulator</b>, I designed a wide range of sounds that bring chaotic DIY home repairs to life. The challenge was to capture the clunky, rough, and sometimes disastrous nature of amateur renovation.</p>
+<p>For this project I opted to using only <b>self recorded</b> sounds. (well, about 99%)</p>
 
 <h3>Power Tools & Cutting</h3>
 <ul>
