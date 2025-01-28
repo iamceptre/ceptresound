@@ -8,7 +8,7 @@ video: /projects/lone-soul.mp4
 footerVideo: 
 category: sound redesign
 date: 27th Jan 2025
-createdAt: 2025/01/27
+createdAt: 2000/01/27
 ---
 
 <h2>Magical Soundcraft</h2>
