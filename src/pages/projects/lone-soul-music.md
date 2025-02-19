@@ -3,7 +3,7 @@ layout: ../../layouts/post.astro
 tag: music
 thumbnail: /projects/thumb-lone-soul-music.webp
 heroImage:
-title: Lone Soul Main Theme
+title: Lone Soul Menu Theme
 video: /projects/lone-soul-music.mp4
 footerVideo: 
 category: music

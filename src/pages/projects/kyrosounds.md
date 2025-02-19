@@ -6,7 +6,7 @@ heroImage: /projects/hero-kyrosounds.webp
 title: Music Project "kyrosounds"
 video:
 footerVideo: 
-category: musical alias
+category: music alias
 date: since 2021
 createdAt: 2021/05/00
 ---

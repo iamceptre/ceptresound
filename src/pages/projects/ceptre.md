@@ -6,7 +6,7 @@ heroImage: /projects/hero-ceptre.png
 title: Music Project "Ceptre"
 video:
 footerVideo: 
-category: music creation
+category: music alias
 date: since 2023
 createdAt: 2023/11/22
 ---
