@@ -9,6 +9,9 @@
     --cl-grey-900: hsl(0, 0%, 80%);
     --cl-grey-800: hsl(0, 0%, 40%);
 
+    /* kolor tekstu */
+    --cl-text: #151515;
+
     --scale: 1.2;
 
     /* 5.159780352 */
@@ -39,7 +42,7 @@
 
 ::-webkit-scrollbar {
     width: 0;
-  }
+}
 
 img, svg, video, canvas, audio, iframe, embed, object {
     display: block;
@@ -54,8 +57,16 @@ body {
     background-color: var(--cl-bg);
     font-family: Inter;
     font-size: var(--size-font);
+    color: var(--cl-text);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+}
+
+em,
+i {
+    font-style: italic;
+    color: var(--cl-grey-800);
+    letter-spacing: 0.01em;
 }
 
 hr {
