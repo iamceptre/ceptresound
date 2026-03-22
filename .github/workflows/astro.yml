@@ -14,6 +14,7 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+# Wymuszenie Node 24 dla wszystkich akcji JS
 env:
   BUILD_PATH: "."
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -24,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5 
+        uses: actions/checkout@v4
 
       - name: Detect package manager
         id: detect-package-manager
@@ -44,7 +45,7 @@ jobs:
             exit 1
 
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v4
         with:
           node-version: "24"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
@@ -81,7 +82,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
+    name: Deploy
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4.0.5
+        uses: actions/deploy-pages@v4
