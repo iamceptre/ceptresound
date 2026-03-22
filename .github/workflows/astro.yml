@@ -1,4 +1,4 @@
-name: Deploy Astro site to Pages
+name: Deploy Astro site to GitHub Pages
 
 on:
   push:
@@ -19,46 +19,29 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  build:
-    name: Build
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      # 1. Checkout repozytorium
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "yarn.lock" ]; then
-            echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            echo "runner=yarn" >> $GITHUB_OUTPUT
-            echo "lockfile=yarn.lock" >> $GITHUB_OUTPUT
-          elif [ -f "package-lock.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            echo "lockfile=package-lock.json" >> $GITHUB_OUTPUT
-          else
-            echo "Unable to determine package manager"
-            exit 1
-
-      - name: Setup Node.js 24
+      # 2. Ustaw Node.js 24
+      - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: ${{ steps.detect-package-manager.outputs.lockfile }}
 
+      # 3. Instalacja zależności
       - name: Install dependencies
         run: |
-          if [ "${{ steps.detect-package-manager.outputs.manager }}" = "yarn" ]; then
+          if [ -f "yarn.lock" ]; then
             yarn install --immutable
           else
             npm ci
-          fi
         working-directory: ${{ env.BUILD_PATH }}
 
+      # 4. Build Astro z poprawnym URL
       - name: Build with Astro
         run: |
           npx astro build \
@@ -66,19 +49,13 @@ jobs:
             --base "/ceptresound/"
         working-directory: ${{ env.BUILD_PATH }}
 
-      - name: Upload artifact
+      # 5. Upload artefaktu do GitHub Pages
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ${{ env.BUILD_PATH }}/dist
 
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy artifact
+      # 6. Deploy do GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.5
