@@ -26,23 +26,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      # 2. Setup Node.js 24
+      # 2. Ustaw Node.js 24
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: 24
 
-      # 3. Instalacja zależności (yarn lub npm)
+      # 3. Instalacja zależności
       - name: Install dependencies
         run: |
           if [ -f "yarn.lock" ]; then
             yarn install --immutable
           else
             npm ci
-          fi
         working-directory: ${{ env.BUILD_PATH }}
 
-      # 4. Build Astro z poprawnym URL dla GitHub Pages
+      # 4. Build Astro z poprawnym URL
       - name: Build with Astro
         run: |
           npx astro build \
