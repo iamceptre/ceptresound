@@ -68,7 +68,7 @@ const CopyToClipboard = () => {
             >
                 brandeburglukasz@gmail.com
             </span>
-            {tooltipState !== 'hidden' && <div style={tooltipStyle}>Mail copied!</div>}
+            {tooltipState !== 'hidden' && <div style={tooltipStyle}>email copied</div>}
         </div>
     );
 };

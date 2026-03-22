@@ -4,7 +4,9 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { SITE_TITLE } from '../config'
 
-const allProjects = (await Astro.glob('./projects/*.md'))
+const allProjects = Object.values(
+  import.meta.glob('./projects/*.md', { eager: true })
+)
 
 const groupProjectsByTag = (projects: any[]) => {
   const grouped: Record<string, any[]> = {}
@@ -69,7 +71,7 @@ sections.sort((a, b) => {
 							return (
 							<div class="project">
 								<a href={project.url}>
-									<img src={thumbnailSrc} alt="d"/>
+									<img src={thumbnailSrc} loading="lazy" decoding="async" />
 									<div class="info-wrapper">
 										<div>{project.frontmatter.title}</div>
 										<div>
