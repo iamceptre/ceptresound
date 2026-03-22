@@ -20,50 +20,28 @@ env:
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "yarn.lock" ]; then
-            echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            echo "runner=yarn" >> $GITHUB_OUTPUT
-            echo "lockfile=yarn.lock" >> $GITHUB_OUTPUT
-          elif [ -f "package-lock.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            echo "lockfile=package-lock.json" >> $GITHUB_OUTPUT
-          else
-            echo "Unable to determine package manager"
-            exit 1
-
       - name: Setup Node.js 24
         uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: ${{ steps.detect-package-manager.outputs.lockfile }}
 
       - name: Install dependencies
         run: |
-          if [ "${{ steps.detect-package-manager.outputs.manager }}" = "yarn" ]; then
+          if [ -f "yarn.lock" ]; then
             yarn install --immutable
+          elif [ -f "pnpm-lock.yaml" ]; then
+            npm install -g pnpm && pnpm install
           else
             npm ci
           fi
-        working-directory: ${{ env.BUILD_PATH }}
 
       - name: Build with Astro
-        run: |
-          npx astro build \
-            --site "https://iamceptre.github.io/ceptresound/" \
-            --base "/ceptresound/"
+        run: npx astro build --site "${{ github.repository }}" --base "${{ github.repository }}/"
         working-directory: ${{ env.BUILD_PATH }}
 
       - name: Upload artifact
@@ -72,13 +50,9 @@ jobs:
           path: ${{ env.BUILD_PATH }}/dist
 
   deploy:
-    name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy artifact
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.5
