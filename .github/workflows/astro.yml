@@ -14,7 +14,6 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-# Wymuszenie Node 24 dla wszystkich akcji JS
 env:
   BUILD_PATH: "."
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
