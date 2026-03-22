@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+#luzny stolec
+FUTURE PLANS.txt*
+
+#hidden/back-work files
+.production
