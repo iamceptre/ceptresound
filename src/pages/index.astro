@@ -8,55 +8,36 @@ import hero from '../../public/hero.jpg'
 ---
 
 <html lang="en">
-	<Head title={SITE_TITLE}>
-		<link rel="preload" as="image" href={hero.src} />
-		<link rel="preload" href="../../public/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
-	</Head>
-
+	<Head title={SITE_TITLE}></Head>
 	<body>
 		<section class="main-wrapper">
-			<Header />
-
+			<Header></Header>
 			<main>
 				<div>
 					<div>
-						I'm a Sound Designer and Music Producer with experience dating back to 2014;<br>
+						I'm a Sound Designer and Music Producer with experience dating back to 2014; <br>
 						fascinated with telling stories with the most meaningful audio I can craft.
 					</div>
-
 					<section class="info-wrapper">
 						<div>
 							<div class="category">Sound / Music</div>
 							<span>Ableton, Reaper, Nuendo, RX Pro</span>
 						</div>
-
 						<div>
 							<div class="category">Graphics Design</div>
 							<span>Photoshop, After Effects, Blender</span>
 						</div>
-
 						<div>
 							<div class="category">Game Development</div>
 							<span title="Unreal Engine 3,4 & 5">Unity, Unreal Engine, Fmod, Wwise</span>
 						</div>
 					</section>
 				</div>
-
-				<div class="hero">
-					<Image
-						src={hero}
-						width={720}
-						format="avif"
-						quality={80}
-						alt="hero image"
-						loading="eager"
-						fetchpriority="high"
-						decoding="async"
-					/>
+				<div>
+					<Image src={hero} width={720} alt="hero image" quality={90} />
 				</div>
 			</main>
-
-			<Footer />
+			<Footer></Footer>
 		</section>
 	</body>
 </html>
@@ -74,12 +55,6 @@ import hero from '../../public/hero.jpg'
 	main > div {
 		display: grid;
 		gap: var(--size-900);
-	}
-
-	.hero img {
-		width: 100%;
-		height: auto;
-		display: block;
 	}
 
 	.info-wrapper {
@@ -105,9 +80,8 @@ import hero from '../../public/hero.jpg'
 			gap: var(--size-700);
 		}
 
-		.hero img {
+		img {
 			width: 320px;
-			margin-inline: auto;
 		}
 	}
 </style>
