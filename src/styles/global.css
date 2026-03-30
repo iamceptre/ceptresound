@@ -9,11 +9,11 @@
     --cl-grey-900: hsl(0, 0%, 80%);
     --cl-grey-800: hsl(0, 0%, 40%);
 
-    /* kolor tekstu */
+
     --cl-text: #151515;
 
     --scale: 1.2;
-
+    /*Harmonic font sizes */
     /* 5.159780352 */
     --size-900: calc(1rem * pow(var(--scale), 9));
 

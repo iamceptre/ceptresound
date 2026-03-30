@@ -10,15 +10,13 @@ category: music
 date: 27th Jan 2025
 createdAt: 2025/01/27
 ---
-
-<h2>Ethereal Soundscape</h2>
  
 <p>I crafted The <b>Lone Soul</b> main menu theme with an emphasis on <b>atmosphere</b> and <b>mystical tonality</b>:</p>
  
 <ul> 
-<li>🎵 <b>Floating Harmonics</b> – A delicate blend of inharmonic metallic sounds working together with musical composition to evoke a sense of mystery.</li>
-<li>💫 <b>Subtle Motion</b> – Slow, undulating modulations to keep the piece engaging and moving.</li>
-<li>🔊 <b>Reverberant Space</b> – Carefully (and quietly) placed <b>heavily revberbrated sounds</b> to enhance the feeling of an endless, abstract space.</li>
+<li> <b>Floating Harmonics</b> – A delicate blend of inharmonic metallic sounds working together with musical composition to open up a layer of mystery and depth.</li>
+<li> <b>Subtle Motion</b> – Slow, undulating modulations to keep the piece e<i>(motion)</i>al and lush.</li>
+<li> <b>Reverberant Space</b> – Carefully placed <b>heavily revberbrated sounds</b> to enhance the feeling of an endless, abstract space.</li>
 </ul>
 
 <p>For this one I've used <b>LABS FREE</b> libraries and <b>FORZO Essentials</b> by: Heavyocity</p>
@@ -27,4 +25,4 @@ createdAt: 2025/01/27
 </p>
 
 
-<h3>Game</h3> <p>🦊 <b>Lone Soul</b> by: Laughing Fox Games (Unreleased)</p> <br> 
+<h3>Game</h3> <p> <b>Lone Soul </b>by: Laughing Fox Games</p> <br> 
