@@ -6,143 +6,112 @@ import { SITE_TITLE } from '../config';
 import { Image } from 'astro:assets';
 
 export interface Props {
-  content: {
-    title: string;
-    heroImage?: string;
-    video?: string;
-    footerVideo?: string;
-  };
+    content: {
+        title: string;
+        description?: string;
+        heroImage?: string;
+        video?: string;
+        footerVideo?: string;
+    };
 }
 
-const {
-  content: { title, heroImage, video, footerVideo },
-} = Astro.props;
+const { content: { title, description, heroImage, video, footerVideo } } = Astro.props;
 ---
 
 <html lang="en">
-  <Head title={title + ` / ${SITE_TITLE}`}></Head>
-  <body>
-    <section class="main-wrapper">
-      <Header></Header>
-      <main>
-        <div class="media-wrapper">
-          {
-            heroImage && (
-              <Image
-                class="hero-image"
-                src={heroImage}
-                width={16} 
-                height={9} 
-                quality={90}
-                alt=""
-              />
-            )
-          }
-          {
-            video && (
-              <video controls class="video" poster="/black-16-9.png">
-                <source src={video} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            )
-          }
-        </div>
-        <div class="title">{title}</div>
-        <hr>
-        <slot></slot>
-        {
-          footerVideo && (
-            <video controls class="footer-video" poster="/black-16-9.png">
-              <source src={footerVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          )
-        }
-      </main>
-      <Footer></Footer>
-    </section>
-  </body>
+    <Head title={`${title} / ${SITE_TITLE}`} description={description} />
+    <body>
+        <section class="main-wrapper">
+            <Header />
+            <main>
+                <div class="media-wrapper">
+                    {heroImage && (
+                        <Image
+                            class="hero-image"
+                            src={heroImage}
+                            width={1280}
+                            height={720}
+                            quality={90}
+                            loading="eager"
+                            fetchpriority="high"
+                            alt=""
+                        />
+                    )}
+                    {video && (
+                        <video controls preload="auto" class="video" poster="/black-16-9.png">
+                            <source src={video} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    )}
+                </div>
+                <div class="title">{title}</div>
+                <hr />
+                <slot />
+                {footerVideo && (
+                    <video controls class="footer-video" poster="/black-16-9.png">
+                        <source src={footerVideo} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                )}
+            </main>
+            <Footer />
+        </section>
+    </body>
 </html>
 
 <style>
-  main {
-    max-width: 38.2rem;
-    margin-inline: auto;
-  }
+    main {
+        max-width: 38.2rem;
+        margin-inline: auto;
+    }
 
-  .title {
-    font-size: var(--size-700);
-    margin-top: 1rem;
-    text-align: center;
-  }
+    .title {
+        font-size: var(--size-700);
+        margin-top: 1rem;
+        text-align: center;
+    }
 
-  .media-wrapper {
-    display: flex;
-    justify-content: center;
-  }
+    .media-wrapper {
+        display: flex;
+        justify-content: center;
+    }
 
-  .hero-image {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+    .hero-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
 
-  .video,
-  .footer-video {
-    width: 100%;
-    height: auto;
-  }
+    .video,
+    .footer-video {
+        width: 100%;
+        height: auto;
+    }
 
-  .footer-video {
-    margin-top: 1rem;
-  }
+    .footer-video {
+        margin-top: 1rem;
+    }
 
-  :global(p) {
-    margin-bottom: 1rem;
-  }
-
-  :global(h2), 
-  :global(h3) {
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: var(--cl-grey-800);
-  }
-
-  :global(ul), 
-  :global(ol) {
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  :global(li) {
-    margin-bottom: 0.5rem;
-  }
-
-  :global(a) {
-    text-decoration-style: solid;
-    color: black;
-  }
-
-  :global(i) {
-  font-style: italic;
-  color: var(--cl-grey-800);
-  margin-bottom: 0.5rem; 
-}
-
-  :global(b) {
-    font-weight: 600;
-  }
+    :global(p)       { margin-bottom: 1rem; }
+    :global(h2),
+    :global(h3)      { margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: bold; color: var(--cl-grey-800); }
+    :global(ul),
+    :global(ol)      { padding-left: 1.5rem; margin-bottom: 1rem; }
+    :global(li)      { margin-bottom: 0.5rem; }
+    :global(a)       { text-decoration-style: solid; color: black; }
+    :global(i)       { font-style: italic; color: var(--cl-grey-800); margin-bottom: 0.5rem; }
+    :global(b)       { font-weight: 600; }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const links = document.querySelectorAll('a');
-    links.forEach(link => {
-      if (link.hostname !== window.location.hostname) {
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noopener noreferrer');
-      }
+    // Open external links in a new tab.
+    // astro:page-load fires on first load + after every View Transition.
+    document.addEventListener('astro:page-load', () => {
+        document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(link => {
+            if (link.hostname && link.hostname !== location.hostname) {
+                link.target = '_blank';
+                link.rel    = 'noopener noreferrer';
+            }
+        });
     });
-  });
 </script>

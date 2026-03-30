@@ -1,24 +1,24 @@
 import { useState, useEffect } from 'react'
-const Time: React.FC = () => {
-    const [currentTime, setCurrentTime] = useState<string>('12:00')
-    const updateTime = () => {
-        const date = new Date();
-        const options: Intl.DateTimeFormatOptions = {
-            timeZone: 'Europe/Warsaw',
-            hour: '2-digit',
-            minute: '2-digit',
-            hourCycle: 'h23',
-        }
-        const formattedTime = new Intl.DateTimeFormat('pl-PL', options).format(date)
-        setCurrentTime(formattedTime)
-    }
-    useEffect(() => {
-        updateTime()
-        const interval = setInterval(() => {
-            updateTime()
-        }, 5000)
-        return () => clearInterval(interval);
-    }, [])
-    return <div className="time">{currentTime}</div>
+
+function getTime(): string {
+    return new Intl.DateTimeFormat('pl-PL', {
+        timeZone: 'Europe/Warsaw',
+        hour: '2-digit',
+        minute: '2-digit',
+        hourCycle: 'h23',
+    }).format(new Date())
 }
+
+const Time: React.FC = () => {
+    // Lazy initializer — calls getTime() once on mount, no '12:00' flash
+    const [time, setTime] = useState(getTime)
+
+    useEffect(() => {
+        const id = setInterval(() => setTime(getTime()), 5000)
+        return () => clearInterval(id)
+    }, [])
+
+    return <div className="time">{time}</div>
+}
+
 export default Time

@@ -8,80 +8,91 @@ import hero from '../../public/hero.jpg'
 ---
 
 <html lang="en">
-	<Head title={SITE_TITLE}></Head>
-	<body>
-		<section class="main-wrapper">
-			<Header></Header>
-			<main>
-				<div>
-					<div>
-						I'm a Sound Designer and Music Producer with experience dating back to 2014; <br>
-						fascinated with telling stories with the most meaningful audio I can craft.
-					</div>
-					<section class="info-wrapper">
-						<div>
-							<div class="category">Sound / Music</div>
-							<span>Ableton, Reaper, Nuendo, RX Pro</span>
-						</div>
-						<div>
-							<div class="category">Graphics Design</div>
-							<span>Photoshop, After Effects, Blender</span>
-						</div>
-						<div>
-							<div class="category">Game Development</div>
-							<span title="Unreal Engine 3,4 & 5">Unity, Unreal Engine, Fmod, Wwise</span>
-						</div>
-					</section>
-				</div>
-				<div>
-					<Image src={hero} width={720} alt="hero image" quality={90} />
-				</div>
-			</main>
-			<Footer></Footer>
-		</section>
-	</body>
+    <Head title={SITE_TITLE} />
+    <body>
+        <section class="main-wrapper">
+            <Header />
+            <main>
+                <div>
+                    <div>
+                        I'm a Sound Designer and Music Producer with experience dating back to 2014;<br>
+                        fascinated with telling stories with the most meaningful audio I can craft.
+                    </div>
+                    <section class="info-wrapper">
+                        <div>
+                            <div class="category">Sound / Music</div>
+                            <span>Ableton, Reaper, Nuendo, RX Pro</span>
+                        </div>
+                        <div>
+                            <div class="category">Graphics Design</div>
+                            <span>Photoshop, After Effects, Blender</span>
+                        </div>
+                        <div>
+                            <div class="category">Game Development</div>
+                            <span title="Unreal Engine 3, 4 & 5">Unity, Unreal Engine, Fmod, Wwise</span>
+                        </div>
+                    </section>
+                </div>
+                <div>
+                    <!--
+                        loading="eager" + fetchpriority="high": hero is above the fold —
+                        never lazy-load it, and ask browser to fetch it first.
+                    -->
+                    <Image
+                        src={hero}
+                        width={720}
+                        alt="hero image"
+                        quality={90}
+                        loading="eager"
+                        fetchpriority="high"
+                    />
+                </div>
+            </main>
+            <Footer />
+        </section>
+    </body>
 </html>
 
 <style>
-	main {
-		display: grid;
-		grid-template-columns: auto auto;
-		align-items: center;
-		gap: var(--size-900);
-		max-width: 45rem;
-		margin-inline: auto;
-	}
+    main {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        gap: var(--size-900);
+        max-width: 45rem;
+        margin-inline: auto;
+    }
 
-	main > div {
-		display: grid;
-		gap: var(--size-900);
-	}
+    main > div {
+        display: grid;
+        gap: var(--size-900);
+    }
 
-	.info-wrapper {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
+    .info-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 
-	.category {
-		color: var(--cl-grey-800);
-	}
+    .category {
+        color: var(--cl-grey-800);
+    }
 
-	@media screen and (max-width: 60rem) {
-		main {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			gap: var(--size-700);
-			max-width: 20rem;
-		}
+    @media screen and (max-width: 60rem) {
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: var(--size-700);
+            max-width: 20rem;
+        }
 
-		main > div {
-			gap: var(--size-700);
-		}
+        main > div {
+            gap: var(--size-700);
+        }
 
-		img {
-			width: 320px;
-		}
-	}
+        img {
+            width: 320px;
+        }
+    }
 </style>

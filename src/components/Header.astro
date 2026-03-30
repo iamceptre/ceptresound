@@ -1,41 +1,50 @@
 ---
-const currentPath = Astro.url.pathname;
-const navLinks = [
-{ href: '/showreel', label: 'Showreel' },
-    { href: '/', label: 'Home' },
-    { href: '/about/', label: 'About' },
-    { href: '/projects/', label: 'Projects' },
-];
-import CopyToClipboard from "./CopyToClipboard"
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 
+const navLinks = [
+    { href: '/showreel', label: 'Showreel' },
+    { href: '/',         label: 'Home'     },
+    { href: '/about',    label: 'About'    },
+    { href: '/projects', label: 'Projects' },
+];
+
+import CopyToClipboard from './CopyToClipboard'
 ---
+
 <header>
     <div class="logo">
-        <a href="/"><img src="/ceptre-logo.png" alt="ceptre logo" /></a>
+        <a href="/">
+            <img src="/ceptre-logo.png" alt="ceptre logo" loading="eager" decoding="async" />
+        </a>
         <div>
-            <span><a href="https://linktr.ee/ceptre">Łukasz Brandeburg</a></span>
+            <span><a href="https://linktr.ee/ceptre" target="_blank" rel="noopener noreferrer">Łukasz Brandeburg</a></span>
             <span>Sound Designer | Music Producer | Composer</span>
         </div>
     </div>
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="menu-button-wrapper">
+
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-button-wrapper" aria-label="Toggle navigation">
         <div class="menu-button"></div>
     </label>
+
     <nav>
         {navLinks.map(link => (
-            <a 
-                href={link.href} 
-                class={currentPath === link.href ? 'active' : ''}
+            <a
+                href={link.href}
+                class={currentPath === link.href ? 'active' : undefined}
+                aria-current={currentPath === link.href ? 'page' : undefined}
             >
                 {link.label}
             </a>
         ))}
     </nav>
+
     <div class="email-wrapper">
-        <CopyToClipboard client:visible/>
+        <CopyToClipboard client:visible />
     </div>
 </header>
 <hr>
+
 <style>
     header {
         display: grid;
@@ -63,9 +72,6 @@ import CopyToClipboard from "./CopyToClipboard"
         display: none;
         justify-content: flex-end;
         z-index: 10;
-    }
-
-    .menu-button-wrapper:hover {
         cursor: pointer;
     }
 
@@ -79,37 +85,28 @@ import CopyToClipboard from "./CopyToClipboard"
 
     .menu-button::before,
     .menu-button::after {
+        content: '';
         display: block;
-        background-color: hsl(0, 0%, 0%);
+        background-color: black;
         position: absolute;
         height: 2px;
         width: 1.25rem;
         transition: transform 0.15s;
     }
 
-    .menu-button::before {
-        content: '';
-        margin-top: -8px;
-    }
-
-    .menu-button::after {
-        content: '';
-        margin-top: 8px;
-    }
+    .menu-button::before { margin-top: -8px; }
+    .menu-button::after  { margin-top:  8px; }
 
     #menu-toggle:checked + .menu-button-wrapper .menu-button::before {
         margin-top: 0;
         transform: rotate(45deg);
     }
-
     #menu-toggle:checked + .menu-button-wrapper .menu-button::after {
         margin-top: 0;
         transform: rotate(-45deg);
     }
 
-    .email-wrapper {
-        text-align: end;
-    }
+    .email-wrapper { text-align: end; }
 
     .logo {
         display: flex;
@@ -132,14 +129,10 @@ import CopyToClipboard from "./CopyToClipboard"
         font-size: var(--size-300);
     }
 
-    #menu-toggle {
-        display: none;
-    }
+    #menu-toggle { display: none; }
 
     @media screen and (max-width: 30rem) {
-        .logo > div > span:nth-child(2) {
-            display: none;
-        }
+        .logo > div > span:nth-child(2) { display: none; }
     }
 
     @media screen and (max-width: 60rem) {
@@ -151,43 +144,90 @@ import CopyToClipboard from "./CopyToClipboard"
         nav {
             flex-direction: column;
             position: fixed;
+            top: 0;
+            right: -100%;
             width: 100%;
             height: 100%;
-            right: -100%;
-            top: 0;
             background-color: var(--cl-bg);
-            transition: 0.15s ease all;
+            transition: right 0.15s ease;
+            view-transition-name: none;
         }
 
-        .menu-button-wrapper {
-            display: block;
-        }
-        
-        #menu-toggle:checked ~ nav {
-            right: 0;
-        }
+        .menu-button-wrapper { display: block; }
 
-        .email-wrapper {
-            display: none;
-        }
-	}
+        #menu-toggle:checked ~ nav { right: 0; }
+
+        .email-wrapper { display: none; }
+    }
 </style>
+
 <script>
-    const checkbox = document.getElementById('menu-toggle') as HTMLInputElement | null
-    const videos = document.getElementsByTagName('video') as HTMLCollectionOf<HTMLVideoElement>
-    
-    checkbox?.addEventListener('change', function () {
-        if (checkbox.checked) {
-            document.documentElement.style.overflow = 'hidden'
-            for (let video of videos) {
-                video.classList.add('zindex-video')
+    function setupMenu() {
+        const checkbox = document.getElementById('menu-toggle') as HTMLInputElement | null;
+        if (checkbox) checkbox.checked = false;
+        document.documentElement.style.overflow = '';
+
+        checkbox?.addEventListener('change', () => {
+            const open = checkbox.checked;
+            document.documentElement.style.overflow = open ? 'hidden' : '';
+            for (const v of document.getElementsByTagName('video')) {
+                v.classList.toggle('zindex-video', open);
             }
-        } else {
-            document.documentElement.style.overflow = ''
-            for (let video of videos) {
-                video.classList.remove('zindex-video')
-            }
+            if (!open) window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    function updateActiveLink() {
+        const current = window.location.pathname.replace(/\/$/, '') || '/';
+        document.querySelectorAll<HTMLAnchorElement>('nav a').forEach(link => {
+            const path = new URL(link.href).pathname.replace(/\/$/, '') || '/';
+            const active = current === path;
+            link.classList.toggle('active', active);
+            if (active) link.setAttribute('aria-current', 'page');
+            else link.removeAttribute('aria-current');
+        });
+    }
+
+    function setupVideoFocus() {
+        const video = document.querySelector<HTMLVideoElement>('video');
+        if (!video) return;
+        video.tabIndex = 0;
+        video.focus({ preventScroll: true });
+    }
+
+    function setupVideoThumbnails() {
+        const videos = document.querySelectorAll<HTMLVideoElement>('video[poster="/black-16-9.png"]');
+        for (const video of videos) {
+            if (video.preload === 'none') video.preload = 'metadata';
+
+            video.addEventListener('loadedmetadata', () => {
+                video.currentTime = Math.min(video.duration * 0.1, 1);
+            }, { once: true });
+
+            video.addEventListener('seeked', () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width  = video.videoWidth  || 1280;
+                    canvas.height = video.videoHeight || 720;
+                    canvas.getContext('2d')!.drawImage(video, 0, 0);
+                    video.poster = canvas.toDataURL('image/jpeg', 0.85);
+                    video.load();
+                } catch {
+                    // SecurityError or browser restriction — keep black poster
+                }
+            }, { once: true });
         }
-        window.scrollTo({top: -1, behavior: 'smooth'})
-    })
+    }
+
+    document.addEventListener('astro:before-preparation', () => {
+        document.documentElement.classList.add('is-transitioning');
+    });
+
+    document.addEventListener('astro:page-load', () => {
+        document.documentElement.classList.remove('is-transitioning');
+        setupMenu();
+        updateActiveLink();
+        setupVideoFocus();
+        setupVideoThumbnails();
+    });
 </script>

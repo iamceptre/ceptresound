@@ -8,124 +8,110 @@ import hero from '../../public/about.jpg'
 ---
 
 <html lang="en">
-	<Head title={SITE_TITLE}></Head>
-	<body>
-		<section class="main-wrapper">
-			<Header></Header>
-			<main>
-				<div class="about">
-					<div class="hero-img">
-						<Image src={hero} width={720} alt="hero image" quality={90} />
-					</div>
-					<section class="info-wrapper">
-						<div>Łukasz Brandeburg</div>
-						<div class="desc">
-							<div>
-								Game Development brought me to the world of sound creation back in 2014.
-							</div>
-							<div>
-								I love creating and implementing soundscapes for games and making the experience full of the intended emotions of a given project.
-							</div>
-							<div>
-								I'm using technologies such as - <i>Wwise, MetaSound, Fmod</i>.
-							</div>
-							<div>
-								I also have experience with designing, coding, and working on video game visuals, which allows me to deeply understand and communicate with the development team.
-							</div>
-							<div>
-								The Music Genres I'm most experienced in writing are Drum and Bass, Electronic music, Ambient music, Cinematic and Dubstep.
-							</div>
-						</div>
-					</section>
-				</div>
-				<div><hr></div>
-				<div>
-					<div class="achievements">
-						Achievements:
-						<div>
-							Worked on several AAA Video Game as Lead Sound Designer.
-						</div>
-						<div title="SINFUL MAZE, STUDIO, dtdnb">
-							Got signed with highly reputable music labels.
-						</div>
-						<div>
-							Released multiple successful electronic sample packs.
-						</div>
-						<div>
-							Made recurring appearances at Noisia's Vision Radio.
-						</div>
-						<div title="by MoonshineDNB">
-							Got booked internationally to play as a DJ.
-						</div>
-						<div>
-							Got nominated for the Best Polish Drum & Bass Track of 2024 Award.
-						</div>
-					</div>
-				</div>
-			</main>
-			<Footer></Footer>
-		</section>
-	</body>
+    <Head title={`About / ${SITE_TITLE}`} description="Sound Designer, Music Producer and Composer based in Łódź, Poland." />
+    <body>
+        <section class="main-wrapper">
+            <Header />
+            <main>
+                <div class="about">
+                    <div class="hero-img">
+                        <Image
+                            src={hero}
+                            width={720}
+                            alt="Łukasz Brandeburg"
+                            quality={90}
+                            loading="eager"
+                            fetchpriority="high"
+                        />
+                    </div>
+                    <section class="info-wrapper">
+                        <div class="name">Łukasz Brandeburg</div>
+                        <div class="desc">
+                            <div>
+                                Game Development brought me to the world of sound creation back in 2014.
+                            </div>
+                            <div>
+                                I love creating and implementing soundscapes for games and making the experience full of the intended emotions of a given project.
+                            </div>
+                            <div>
+                                I'm using technologies such as — <i>Wwise, MetaSound, Fmod</i>.
+                            </div>
+                            <div>
+                                I also have experience with designing, coding, and working on video game visuals, which allows me to deeply understand and communicate with the development team.
+                            </div>
+                            <div>
+                                The Music Genres I'm most experienced in writing are Drum and Bass, Electronic music, Ambient music, Cinematic and Dubstep.
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <hr>
+                <div>
+                    <div class="achievements">
+                        Achievements:
+                        <div>Worked on several AAA Video Games as Lead Sound Designer.</div>
+                        <div title="SINFUL MAZE, STUDIO, dtdnb">Got signed with highly reputable music labels.</div>
+                        <div>Released multiple successful electronic sample packs.</div>
+                        <div>Made recurring appearances at Noisia's Vision Radio.</div>
+                        <div title="by MoonshineDNB">Got booked internationally to play as a DJ.</div>
+                        <div>Got nominated for the Best Polish Drum & Bass Track of 2024 Award.</div>
+                    </div>
+                </div>
+            </main>
+            <Footer />
+        </section>
+    </body>
 </html>
 
 <style>
-	main {
-		align-content: space-evenly;
-		max-width: 45rem;
-		margin-inline: auto;
-	}
+    main {
+        align-content: space-evenly;
+        max-width: 45rem;
+        margin-inline: auto;
+    }
 
-	.about {
-		display: grid;
-		grid-template-columns: auto auto;
-		gap: var(--size-900);
-	}
+    .about {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: var(--size-900);
+    }
 
-	.achievements {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		column-gap: var(--size-900);
-		row-gap: var(--size-500);
-		color: var(--cl-grey-800);
-	}
+    .achievements {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: var(--size-900);
+        row-gap: var(--size-500);
+        color: var(--cl-grey-800);
+    }
 
-	.info-wrapper {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
+    .info-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 
-	.info-wrapper > div:nth-child(1) {
-		color: var(--cl-grey-800);
-	}
+    .name {
+        color: var(--cl-grey-800);
+    }
 
-	.desc > * {
-		margin-bottom: 1rem;
-	}
+    .desc > * + * {
+        margin-top: 1rem;
+    }
 
-	.category {
-		color: var(--cl-grey-800);
-	}
+    @media screen and (max-width: 60rem) {
+        .about {
+            display: flex;
+            flex-direction: column;
+            max-width: 20rem;
+        }
 
-	@media screen and (max-width: 60rem) {
-		.about {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			max-width: 20rem;
-		}
+        .achievements {
+            display: flex;
+            flex-direction: column;
+        }
 
-		main > div {
-			gap: var(--size-700);
-		}
-
-		.achievements {
-			display: flex;
-			flex-direction: column;
-		}
-
-		img {
-			width: 320px;
-		}
-	}
+        img {
+            width: 320px;
+        }
+    }
 </style>
