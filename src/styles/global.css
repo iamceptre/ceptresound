@@ -25,15 +25,21 @@
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-    animation-duration: 33.34ms;
+    animation-duration: 66.666ms;
 }
 
-/* Respect OS-level "reduce motion" preference */
 @media (prefers-reduced-motion: reduce) {
     ::view-transition-old(root),
     ::view-transition-new(root) {
         animation: none;
     }
+}
+
+/* ── Video play flash — fires on thumbnail click, scoped to video wrapper ── */
+
+@keyframes video-flash {
+    0%   { opacity: 0.2; }
+    100% { opacity: 0; }
 }
 
 /* ── Reset ──────────────────────────────────────────────────────────────── */
@@ -46,7 +52,6 @@
     margin: 0;
 }
 
-/* Hide scrollbar — WebKit + Firefox */
 ::-webkit-scrollbar { width: 0; }
 body { scrollbar-width: none; }
 
@@ -100,7 +105,6 @@ hr {
     z-index: -1;
 }
 
-/* Block scroll during View Transition to prevent scroll-position jump */
 html.is-transitioning {
     overflow: hidden;
 }
