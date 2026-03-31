@@ -26,6 +26,7 @@
 ::view-transition-old(root),
 ::view-transition-new(root) {
     animation-duration: 66.666ms;
+    background-color: var(--cl-bg);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -38,7 +39,7 @@
 /* ── Video play flash ───────────────────────────────────────────────────── */
 
 @keyframes video-flash {
-    0%   { opacity: 0.16; }
+    0%   { opacity: 0.12; }
     100% { opacity: 0; }
 }
 
