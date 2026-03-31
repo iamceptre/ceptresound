@@ -14,7 +14,7 @@ import CopyToClipboard from './CopyToClipboard'
 <header>
     <div class="logo">
         <a href="/">
-            <img src="/ceptre-logo.png" alt="ceptre logo" loading="eager" decoding="async" />
+            <img src="/ceptre-logo.png" alt="ceptre logo" loading="eager" decoding="async" data-manual-fade />
         </a>
         <div>
             <span><a href="https://linktr.ee/ceptre" target="_blank" rel="noopener noreferrer">Łukasz Brandeburg</a></span>
@@ -71,7 +71,7 @@ import CopyToClipboard from './CopyToClipboard'
     .menu-button-wrapper {
         display: none;
         justify-content: flex-end;
-        z-index: 10;
+        z-index: 60;
         cursor: pointer;
     }
 
@@ -151,6 +151,8 @@ import CopyToClipboard from './CopyToClipboard'
             background-color: var(--cl-bg);
             transition: right 0.15s ease;
             view-transition-name: none;
+            /* Ensure nav always sits above video elements and their wrappers */
+            z-index: 50;
         }
 
         .menu-button-wrapper { display: block; }
@@ -165,6 +167,9 @@ import CopyToClipboard from './CopyToClipboard'
     // Custom Video
     let spaceHandler: ((e: KeyboardEvent) => void) | null = null;
 
+    /** True when the device is touch/mobile (no fine pointer). */
+    const isMobile = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
     function setupMenu() {
         const checkbox = document.getElementById('menu-toggle') as HTMLInputElement | null;
         if (checkbox) checkbox.checked = false;
@@ -173,9 +178,18 @@ import CopyToClipboard from './CopyToClipboard'
         checkbox?.addEventListener('change', () => {
             const open = checkbox.checked;
             document.documentElement.style.overflow = open ? 'hidden' : '';
+
+            // Lower both raw <video> elements and any wrapper divs created by
+            // setupVideoThumbnails (they have position:relative and sit above the nav
+            // unless explicitly pushed down).
             for (const v of document.getElementsByTagName('video')) {
                 v.classList.toggle('zindex-video', open);
+                const wrap = v.parentElement;
+                if (wrap instanceof HTMLElement && getComputedStyle(wrap).position === 'relative') {
+                    wrap.style.zIndex = open ? '-1' : '';
+                }
             }
+
             if (!open) window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
@@ -192,6 +206,9 @@ import CopyToClipboard from './CopyToClipboard'
     }
 
     function setupSpacebar() {
+        // Spacebar play/pause is a desktop-only convenience — skip on touch devices.
+        if (isMobile()) return;
+
         // Remove previous handler before registering new one
         if (spaceHandler) document.removeEventListener('keydown', spaceHandler);
 
@@ -224,6 +241,10 @@ import CopyToClipboard from './CopyToClipboard'
     }
 
     function setupVideoThumbnails() {
+        // All the fancy thumbnail/overlay logic is desktop-only.
+        // On touch devices the browser's native controls are sufficient.
+        if (isMobile()) return;
+
         for (const video of document.querySelectorAll<HTMLVideoElement>('video[poster="/black-16-9.png"]')) {
 
             // Hide immediately — prevents the loading-state flash before thumbnail is ready
@@ -248,15 +269,14 @@ import CopyToClipboard from './CopyToClipboard'
                     wrap.appendChild(video);
 
                     // Thumbnail
-                    const thumb = document.createElement('img');
-                    thumb.src = canvas.toDataURL('image/jpeg', 0.8);
-                    thumb.alt = '';
+                    const thumb = document.createElement('img')
+                    thumb.src = canvas.toDataURL('image/jpeg', 0.8)
+                    thumb.alt = ''
                     thumb.setAttribute('aria-hidden', 'true');
                     thumb.style.cssText =
                         'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;';
 
                     // Play button — golden ratio: triangle inscribed in circle of radius R/φ
-                    // R=32, φ=1.618 → r≈19.8; vertices at 0°, 120°, 240° + 1.5px optical shift right
                     const playBtn = document.createElement('div');
                     playBtn.setAttribute('aria-hidden', 'true');
                     playBtn.style.cssText =
@@ -265,7 +285,7 @@ import CopyToClipboard from './CopyToClipboard'
                         '<svg viewBox="0 0 64 64" width="64" height="64" xmlns="http://www.w3.org/2000/svg"' +
                         ' style="filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))">' +
                         '<circle cx="32" cy="32" r="32" fill="rgba(0,0,0,.45)"/>' +
-                        '<polygon points="21.6,14.9 21.6,49.1 51.3,32.0" fill="white"/>' +
+                        '<polygon points="20.6,14.9 20.6,49.1 50.3,32.0" fill="white"/>' +
                         '</svg>';
 
                     // Clickable overlay — sits on top, catches the click BEFORE it reaches <video>
@@ -273,6 +293,8 @@ import CopyToClipboard from './CopyToClipboard'
                     overlay.style.cssText = 'position:absolute;inset:0;cursor:pointer;';
 
                     wrap.appendChild(thumb);
+                    wrap.appendChild(thumb)
+requestAnimationFrame(() => thumb.classList.add('visible'))
                     wrap.appendChild(playBtn);
                     wrap.appendChild(overlay);
 

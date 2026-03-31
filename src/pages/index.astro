@@ -3,8 +3,6 @@ import Head from '../components/Head.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { SITE_TITLE } from '../config'
-import { Image } from 'astro:assets'
-import hero from '../../public/hero.jpg'
 ---
 
 <html lang="en">
@@ -15,10 +13,11 @@ import hero from '../../public/hero.jpg'
             <main>
                 <div>
                     <div>
-                        I'm a Sound Designer and Music Producer with experience dating back to 2014;<br>
-                        fascinated with telling stories with the most meaningful audio I can craft.
+                        I'm a Sound Designer and Music Producer with experience dating back to 2014.
+                        <br><br><p> I implement using <i>Wwise, MetaSound and FMOD</i>. <br><br></p>
+                        My background in game visuals and code helps me speak the team's language, which makes the whole collaboration a lot smoother.
                     </div>
-                    <section class="info-wrapper">
+                      <section class="info-wrapper">
                         <div>
                             <div class="category">Sound / Music</div>
                             <span>Ableton, Reaper, Nuendo, RX Pro</span>
@@ -33,18 +32,22 @@ import hero from '../../public/hero.jpg'
                         </div>
                     </section>
                 </div>
-                <div>
-                    <!--
-                        loading="eager" + fetchpriority="high": hero is above the fold —
-                        never lazy-load it, and ask browser to fetch it first.
-                    -->
-                    <Image
-                        src={hero}
-                        width={720}
+                <div class="hero-wrapper">
+                    <img
+                        id="hero-low"
+                        src="/hero-low.webp"
+                        width="720"
                         alt="hero image"
-                        quality={90}
-                        loading="eager"
                         fetchpriority="high"
+                        data-manual-fade
+                    />
+                    <img
+                        id="hero-full"
+                        src=""
+                        width="720"
+                        alt=""
+                        aria-hidden="true"
+                        data-manual-fade
                     />
                 </div>
             </main>
@@ -53,7 +56,44 @@ import hero from '../../public/hero.jpg'
     </body>
 </html>
 
+<script>
+    function initHero() {
+        const low  = document.getElementById('hero-low')  as HTMLImageElement
+        const full = document.getElementById('hero-full') as HTMLImageElement
+        if (!low || !full) return
+
+        low.classList.remove('visible')
+        full.classList.remove('visible')
+
+        if (low.complete && low.naturalWidth > 0) {
+            low.classList.add('visible')
+        } else {
+            low.addEventListener('load', () => low.classList.add('visible'), { once: true })
+        }
+
+        const hi = new Image()
+        hi.onload = () => {
+            full.src = hi.src
+            requestAnimationFrame(() => full.classList.add('visible'))
+        }
+        hi.src = '/hero.jpg'
+    }
+
+    initHero()
+    window.addEventListener('pageshow', (e) => { if (e.persisted) initHero() })
+    document.addEventListener('astro:page-load', initHero)
+</script>
+
 <style>
+    .hero-wrapper {
+        position: relative;
+    }
+
+    #hero-full {
+        position: absolute;
+        inset: 0;
+    }
+
     main {
         display: grid;
         grid-template-columns: auto auto;

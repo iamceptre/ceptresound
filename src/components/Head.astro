@@ -19,9 +19,25 @@ const { title, description } = Astro.props
     <meta name="title" content={title} />
     {description && <meta name="description" content={description} />}
 
-    <!-- Preload variable font — eliminates FOIT on first paint -->
     <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- SPA routing + crossfade (animation defined in global.css) -->
     <ViewTransitions />
+
+    <script>
+        function initImages() {
+            document.querySelectorAll<HTMLImageElement>('img:not([data-manual-fade])').forEach(img => {
+                if (img.classList.contains('visible')) return
+                if (img.complete && img.naturalWidth > 0) {
+                    img.classList.add('visible')
+                } else if (img.getAttribute('src')) {
+                    img.addEventListener('load',  () => img.classList.add('visible'), { once: true })
+                    img.addEventListener('error', () => img.classList.add('visible'), { once: true })
+                }
+            })
+        }
+
+        initImages()
+        window.addEventListener('pageshow', (e) => { if (e.persisted) initImages() })
+        document.addEventListener('astro:page-load', initImages)
+    </script>
 </head>

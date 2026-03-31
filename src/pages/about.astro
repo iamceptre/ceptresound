@@ -25,36 +25,45 @@ import hero from '../../public/about.jpg'
                         />
                     </div>
                     <section class="info-wrapper">
-                        <div class="name">Łukasz Brandeburg</div>
+                        <div class="name">Hi, I'm Łukasz, also known as "Ceptre"</div>
                         <div class="desc">
                             <div>
-                                Game Development brought me to the world of sound creation back in 2014.
+                                Games pulled me into sound in 2014, and I've never quite recovered
+                                from that first realisation of how much audio shapes what we feel
+                                without us knowing why.
                             </div>
                             <div>
-                                I love creating and implementing soundscapes for games and making the experience full of the intended emotions of a given project.
+                                Before I touch a single tool, I go to understand what a project tells - its tensions, the atmosphere it lives in, what it's afraid of. The emotional logic of a scene comes first.<br> Sound follows.
                             </div>
                             <div>
-                                I'm using technologies such as — <i>Wwise, MetaSound, Fmod</i>.
-                            </div>
-                            <div>
-                                I also have experience with designing, coding, and working on video game visuals, which allows me to deeply understand and communicate with the development team.
-                            </div>
-                            <div>
-                                The Music Genres I'm most experienced in writing are Drum and Bass, Electronic music, Ambient music, Cinematic and Dubstep.
+                                I draw inspiration from nature, reference physics for accuracy, and
+                                work with our auditory perception - how sound operates below our
+                                consciousness. <br>I often layer elements the listener won't notice
+                                but will absolutely feel: human voices buried in textures, frequencies
+                                that reach somewhere quieter and deeper.
                             </div>
                         </div>
                     </section>
+                    <div class="desc-below">
+                        <div>
+                            12+ years in <i>IDM, Tech DnB and Ambient</i> gave me a technical foundation I quietly rely on. It also drew me toward the edges - sounds that don't quite exist yet feel inevitable, like something the ear always knew was there.
+                        </div>
+                    </div>
                 </div>
+                <br>
                 <hr>
                 <div>
                     <div class="achievements">
-                        Achievements:
-                        <div>Worked on several AAA Video Games as Lead Sound Designer.</div>
-                        <div title="SINFUL MAZE, STUDIO, dtdnb">Got signed with highly reputable music labels.</div>
-                        <div>Released multiple successful electronic sample packs.</div>
-                        <div>Made recurring appearances at Noisia's Vision Radio.</div>
-                        <div title="by MoonshineDNB">Got booked internationally to play as a DJ.</div>
-                        <div>Got nominated for the Best Polish Drum & Bass Track of 2024 Award.</div>
+                        <div class="col">
+                            <div>Lead Sound Designer on several AAA titles.</div>
+                            <div title="by MoonshineDNB">Booked internationally as a DJ.</div>
+                            <div>Released multiple electronic sample packs.</div>
+                        </div>
+                        <div class="col">
+                            <div title="SINFUL MAZE, STUDIO, dtdnb">Signed with highly reputable music labels.</div>
+                            <div>Regular appearances on Noisia's Vision Radio.</div>
+                            <div>Nominated for Best Polish Drum & Bass Track, 2024.</div>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -74,14 +83,32 @@ import hero from '../../public/about.jpg'
         display: grid;
         grid-template-columns: auto auto;
         gap: var(--size-900);
+        row-gap: 1rem;
+    }
+
+    .hero-img     { grid-column: 1; grid-row: 1; }
+    .info-wrapper { grid-column: 2; grid-row: 1; }
+
+    .desc-below {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .desc-below > * + * {
+        margin-top: 1rem;
     }
 
     .achievements {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: var(--size-900);
-        row-gap: var(--size-500);
+        display: flex;
+        gap: var(--size-900);
         color: var(--cl-grey-800);
+    }
+
+    .achievements .col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-500);
     }
 
     .info-wrapper {
@@ -103,6 +130,12 @@ import hero from '../../public/about.jpg'
             display: flex;
             flex-direction: column;
             max-width: 20rem;
+            margin-inline: auto;
+        }
+
+        .hero-img, .info-wrapper, .desc-below {
+            grid-column: unset;
+            grid-row: unset;
         }
 
         .achievements {
