@@ -1,14 +1,8 @@
----
-import Time from './Time.tsx'
----
-
 <hr>
 <footer>
     <div class="current-year">@{new Date().getFullYear()}</div>
     <section class="info-wrapper">
-        <!-- client:visible — only hydrates when footer scrolls into view -->
-        <Time client:visible />
-        <div>Łódź, Poland</div>
+        <div>I'm currently in: Łódź, Poland</div>
     </section>
 </footer>
 
