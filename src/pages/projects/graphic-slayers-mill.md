@@ -3,6 +3,8 @@ layout: ../../layouts/post.astro
 tag: visual-design
 thumbnail: /projects/thumb-graphic-slayers-mill.webp
 heroImage: /projects/graphic-slayers-mill.jpg
+heroImageWidth: 1000
+heroImageHeight: 1000
 title: Slayers Mill
 video:
 footerVideo: 

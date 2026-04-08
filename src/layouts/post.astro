@@ -10,12 +10,16 @@ export interface Props {
         title: string;
         description?: string;
         heroImage?: string;
+        heroImageWidth?: number;
+        heroImageHeight?: number;
         video?: string;
+        videoWidth?: number;
+        videoHeight?: number;
         footerVideo?: string;
     };
 }
 
-const { content: { title, description, heroImage, video, footerVideo } } = Astro.props;
+const { content: { title, description, heroImage, heroImageWidth, heroImageHeight, video, videoWidth, videoHeight, footerVideo } } = Astro.props;
 ---
 
 <html lang="en">
@@ -29,8 +33,8 @@ const { content: { title, description, heroImage, video, footerVideo } } = Astro
                         <Image
                             class="hero-image"
                             src={heroImage}
-                            width={1280}
-                            height={720}
+                            width={heroImageWidth ?? 1280}
+                            height={heroImageHeight ?? 720}
                             quality={90}
                             loading="eager"
                             fetchpriority="high"
@@ -38,7 +42,15 @@ const { content: { title, description, heroImage, video, footerVideo } } = Astro
                         />
                     )}
                     {video && (
-                        <video controls preload="auto" class="video" poster="/black-16-9.png">
+                        <video
+                            controls
+                            preload="auto"
+                            class="video"
+                            poster="/black-16-9.png"
+                            playsinline
+                            width={videoWidth ?? 1280}
+                            height={videoHeight ?? 720}
+                        >
                             <source src={video} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
@@ -48,7 +60,15 @@ const { content: { title, description, heroImage, video, footerVideo } } = Astro
                 <hr />
                 <slot />
                 {footerVideo && (
-                    <video controls class="footer-video" poster="/black-16-9.png">
+                    <video
+                        controls
+                        preload="metadata"
+                        class="footer-video"
+                        poster="/black-16-9.png"
+                        playsinline
+                        width={videoWidth ?? 1280}
+                        height={videoHeight ?? 720}
+                    >
                         <source src={footerVideo} type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
@@ -102,17 +122,3 @@ const { content: { title, description, heroImage, video, footerVideo } } = Astro
     :global(i)       { font-style: italic; color: var(--cl-grey-800); margin-bottom: 0.5rem; }
     :global(b)       { font-weight: 600; }
 </style>
-
-<script>
-    // Open external links in a new tab.
-    // astro:page-load fires on first load + after every View Transition.
-    document.addEventListener('astro:page-load', () => {
-        document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(link => {
-            if (link.hostname && link.hostname !== location.hostname) {
-                link.target = '_blank';
-                link.rel    = 'noopener noreferrer';
-            }
-        });
-    });
-
-</script>

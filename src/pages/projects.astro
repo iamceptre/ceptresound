@@ -63,6 +63,8 @@ const sections = Object.entries(groupedProjects)
                                         <img
                                             src={project.frontmatter.thumbnail}
                                             alt={project.frontmatter.title}
+                                            width="668"
+                                            height="401"
                                             loading="lazy"
                                             decoding="async"
                                         />
@@ -86,10 +88,6 @@ const sections = Object.entries(groupedProjects)
 </html>
 
 <style>
-    html {
-        scroll-behavior: smooth;
-    }
-
     main {
         max-width: 60rem;
         margin-inline: auto;

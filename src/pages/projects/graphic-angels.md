@@ -3,6 +3,8 @@ layout: ../../layouts/post.astro
 tag: visual-design
 thumbnail: /projects/thumb-graphic-angels.webp
 heroImage: /projects/graphic-angels.png
+heroImageWidth: 1000
+heroImageHeight: 1000
 title: Angels
 video:
 footerVideo: 

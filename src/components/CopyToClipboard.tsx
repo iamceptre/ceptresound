@@ -25,6 +25,7 @@ const CopyToClipboard = () => {
             <span
                 className="email"
                 onClick={handleCopy}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCopy() } }}
                 role="button"
                 tabIndex={0}
                 aria-live="polite"

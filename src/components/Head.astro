@@ -19,6 +19,13 @@ const { title, description } = Astro.props
     <meta name="title" content={title} />
     {description && <meta name="description" content={description} />}
 
+    <meta property="og:type"  content="website" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta name="twitter:card"  content="summary" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+
     <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
 
     <ViewTransitions />
@@ -39,5 +46,16 @@ const { title, description } = Astro.props
         initImages()
         window.addEventListener('pageshow', (e) => { if (e.persisted) initImages() })
         document.addEventListener('astro:page-load', initImages)
+
+        function openExternalLinks() {
+            document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(link => {
+                if (link.hostname && link.hostname !== location.hostname) {
+                    link.target = '_blank'
+                    link.rel    = 'noopener noreferrer'
+                }
+            })
+        }
+        openExternalLinks()
+        document.addEventListener('astro:page-load', openExternalLinks)
     </script>
 </head>

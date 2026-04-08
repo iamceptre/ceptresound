@@ -5,6 +5,8 @@ thumbnail: /projects/thumb-sh3-geometry-room.webp
 heroImage:
 title: Silent Hill 3 Geometry Room
 video: /projects/sh-3-geometry-room.mp4
+videoWidth: 634
+videoHeight: 480
 footerVideo: 
 category: sound redesign
 date: 16th Nov 2024

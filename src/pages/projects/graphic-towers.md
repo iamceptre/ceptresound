@@ -3,6 +3,8 @@ layout: ../../layouts/post.astro
 tag: visual-design
 thumbnail: /projects/thumb-graphic-towers.webp
 heroImage: /projects/graphic-towers.jpg
+heroImageWidth: 1000
+heroImageHeight: 1000
 title: Towers EP
 video:
 footerVideo: 

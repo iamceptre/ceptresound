@@ -21,8 +21,6 @@
     --size-font: 0.9375rem;
 }
 
-/* ── Page crossfade ─────────────────────────────────────────────────────── */
-
 ::view-transition-old(root),
 ::view-transition-new(root) {
     animation-duration: 66.666ms;
@@ -36,18 +34,28 @@
     }
 }
 
-/* ── Video play flash ───────────────────────────────────────────────────── */
-
 @keyframes video-flash {
     0%   { opacity: 0.12; }
     100% { opacity: 0; }
 }
 
+html.is-transitioning {
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+}
+
+:focus-visible {
+    outline: 2px solid var(--cl-text);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
 html {
     background-color: var(--cl-bg);
 }
-
-/* ── Reset ──────────────────────────────────────────────────────────────── */
 
 * {
     font: inherit;
@@ -74,8 +82,6 @@ img {
 img.visible {
     opacity: 1;
 }
-
-/* ── Base ───────────────────────────────────────────────────────────────── */
 
 body {
     background-color: var(--cl-bg);
@@ -116,23 +122,10 @@ hr {
     z-index: -1;
 }
 
-html.is-transitioning {
-    overflow: hidden;
-}
-
 .logo img {
     max-width: 2rem;
     height: 2rem;
     opacity: 1;
-}
-
-@keyframes fade-in {
-    from { opacity: 0.32; }
-    to   { opacity: 1; }
-}
-
-main {
-    animation: fade-in 100ms ease both;
 }
 
 .category {

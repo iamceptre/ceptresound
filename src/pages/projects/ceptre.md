@@ -3,6 +3,8 @@ layout: ../../layouts/post.astro
 tag: music
 thumbnail: /projects/thumb-ceptre.webp
 heroImage: /projects/hero-ceptre.png
+heroImageWidth: 915
+heroImageHeight: 565
 title: Music Project "Ceptre"
 video:
 footerVideo: 

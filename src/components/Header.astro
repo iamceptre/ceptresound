@@ -14,7 +14,7 @@ import CopyToClipboard from './CopyToClipboard'
 <header>
     <div class="logo">
         <a href="/">
-            <img src="/ceptre-logo.png" alt="ceptre logo" loading="eager" decoding="async" data-manual-fade />
+            <img src="/ceptre-logo.png" alt="ceptre logo" width="32" height="32" loading="eager" decoding="async" data-manual-fade />
         </a>
         <div>
             <span><a href="https://linktr.ee/ceptre" target="_blank" rel="noopener noreferrer">Łukasz Brandeburg</a></span>
@@ -151,7 +151,6 @@ import CopyToClipboard from './CopyToClipboard'
             background-color: var(--cl-bg);
             transition: right 0.15s ease;
             view-transition-name: none;
-            /* Ensure nav always sits above video elements and their wrappers */
             z-index: 50;
         }
 
@@ -164,11 +163,10 @@ import CopyToClipboard from './CopyToClipboard'
 </style>
 
 <script>
-    // Custom Video
     let spaceHandler: ((e: KeyboardEvent) => void) | null = null;
 
-    /** True when the device is touch/mobile (no fine pointer). */
     const isMobile = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const isWebKit = () => navigator.vendor === 'Apple Computer, Inc.';
 
     function setupMenu() {
         const checkbox = document.getElementById('menu-toggle') as HTMLInputElement | null;
@@ -179,9 +177,6 @@ import CopyToClipboard from './CopyToClipboard'
             const open = checkbox.checked;
             document.documentElement.style.overflow = open ? 'hidden' : '';
 
-            // Lower both raw <video> elements and any wrapper divs created by
-            // setupVideoThumbnails (they have position:relative and sit above the nav
-            // unless explicitly pushed down).
             for (const v of document.getElementsByTagName('video')) {
                 v.classList.toggle('zindex-video', open);
                 const wrap = v.parentElement;
@@ -206,10 +201,8 @@ import CopyToClipboard from './CopyToClipboard'
     }
 
     function setupSpacebar() {
-        // Spacebar play/pause is a desktop-only convenience — skip on touch devices.
         if (isMobile()) return;
 
-        // Remove previous handler before registering new one
         if (spaceHandler) document.removeEventListener('keydown', spaceHandler);
 
         spaceHandler = (e: KeyboardEvent) => {
@@ -220,7 +213,6 @@ import CopyToClipboard from './CopyToClipboard'
             if (!video) return;
             e.preventDefault();
             if (video.paused) {
-                // Flash the video wrapper if one exists (set up by setupVideoThumbnails)
                 const wrap = video.parentElement;
                 if (wrap instanceof HTMLElement && getComputedStyle(wrap).position === 'relative') {
                     const flash = document.createElement('div');
@@ -241,34 +233,28 @@ import CopyToClipboard from './CopyToClipboard'
     }
 
     function setupVideoThumbnails() {
-        // All the fancy thumbnail/overlay logic is desktop-only.
-        // On touch devices the browser's native controls are sufficient.
-        if (isMobile()) return;
+        if (isMobile() || isWebKit()) return;
 
         for (const video of document.querySelectorAll<HTMLVideoElement>('video[poster="/black-16-9.png"]')) {
 
-            // Hide immediately — prevents the loading-state flash before thumbnail is ready
             video.style.visibility = 'hidden';
 
             const build = () => {
                 try {
-                    // Capture frame at seek point
                     const canvas = document.createElement('canvas');
                     canvas.width  = video.videoWidth  || 1280;
                     canvas.height = video.videoHeight || 720;
                     canvas.getContext('2d')!.drawImage(video, 0, 0);
                     video.currentTime = 0;
 
-                    // Wrap video so overlays are scoped to its dimensions
                     const wrap = document.createElement('div');
                     wrap.className = video.className;
                     wrap.style.cssText = 'position:relative;line-height:0;';
                     video.removeAttribute('class');
-                    video.style.cssText = 'width:100%;height:100%;display:block;visibility:hidden;';
+                    video.style.cssText = 'width:100%;height:auto;display:block;visibility:hidden;';
                     video.parentElement!.insertBefore(wrap, video);
                     wrap.appendChild(video);
 
-                    // Thumbnail
                     const thumb = document.createElement('img')
                     thumb.src = canvas.toDataURL('image/jpeg', 0.8)
                     thumb.alt = ''
@@ -276,7 +262,6 @@ import CopyToClipboard from './CopyToClipboard'
                     thumb.style.cssText =
                         'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;';
 
-                    // Play button — golden ratio: triangle inscribed in circle of radius R/φ
                     const playBtn = document.createElement('div');
                     playBtn.setAttribute('aria-hidden', 'true');
                     playBtn.style.cssText =
@@ -288,17 +273,14 @@ import CopyToClipboard from './CopyToClipboard'
                         '<polygon points="20.6,14.9 20.6,49.1 50.3,32.0" fill="white"/>' +
                         '</svg>';
 
-                    // Clickable overlay — sits on top, catches the click BEFORE it reaches <video>
                     const overlay = document.createElement('div');
                     overlay.style.cssText = 'position:absolute;inset:0;cursor:pointer;';
 
-                    wrap.appendChild(thumb);
                     wrap.appendChild(thumb)
-requestAnimationFrame(() => thumb.classList.add('visible'))
+                    requestAnimationFrame(() => thumb.classList.add('visible'))
                     wrap.appendChild(playBtn);
                     wrap.appendChild(overlay);
 
-                    // 'play' fires regardless of trigger (click OR spacebar) — single cleanup path
                     video.addEventListener('play', () => {
                         thumb.remove();
                         playBtn.remove();
@@ -307,10 +289,8 @@ requestAnimationFrame(() => thumb.classList.add('visible'))
                     }, { once: true });
 
                     overlay.addEventListener('click', (e) => {
-                        // Stop propagation so <video> never receives this click (no controls flash)
                         e.stopPropagation();
 
-                        // White flash scoped to wrapper only
                         const flash = document.createElement('div');
                         flash.setAttribute('aria-hidden', 'true');
                         flash.style.cssText =
@@ -319,25 +299,36 @@ requestAnimationFrame(() => thumb.classList.add('visible'))
                         wrap.appendChild(flash);
                         flash.addEventListener('animationend', () => flash.remove(), { once: true });
 
-                        video.play(); // triggers 'play' event above → cleans up overlays
+                        video.play();
                     }, { once: true });
 
                 } catch {
-                    // Cross-origin / security restriction — unhide video and skip thumbnail
                     video.style.visibility = 'visible';
                 }
             };
 
+            const showFallback = () => { video.style.visibility = 'visible'; };
+
             const seekAndBuild = () => {
                 video.currentTime = Math.min(video.duration * 0.1, 1);
-                video.addEventListener('seeked', build, { once: true });
+                const seekTimeout = setTimeout(showFallback, 3000);
+                video.addEventListener('seeked', () => {
+                    clearTimeout(seekTimeout);
+                    build();
+                }, { once: true });
             };
+
+            video.addEventListener('error', showFallback, { once: true });
 
             if (video.readyState >= 1) {
                 seekAndBuild();
             } else {
                 if (video.preload === 'none') video.preload = 'metadata';
-                video.addEventListener('loadedmetadata', seekAndBuild, { once: true });
+                const metaTimeout = setTimeout(showFallback, 5000);
+                video.addEventListener('loadedmetadata', () => {
+                    clearTimeout(metaTimeout);
+                    seekAndBuild();
+                }, { once: true });
             }
         }
     }

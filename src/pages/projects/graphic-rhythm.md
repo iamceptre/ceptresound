@@ -3,6 +3,8 @@ layout: ../../layouts/post.astro
 tag: visual-design
 thumbnail: /projects/thumb-graphic-rhythm.webp
 heroImage: /projects/graphic-rhythm.jpg
+heroImageWidth: 1000
+heroImageHeight: 1000
 title: Rhythm
 video:
 footerVideo: 
