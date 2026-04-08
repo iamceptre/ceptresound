@@ -9,6 +9,7 @@ export interface Props {
     content: {
         title: string;
         description?: string;
+        thumbnail?: string;
         heroImage?: string;
         heroImageWidth?: number;
         heroImageHeight?: number;
@@ -19,11 +20,11 @@ export interface Props {
     };
 }
 
-const { content: { title, description, heroImage, heroImageWidth, heroImageHeight, video, videoWidth, videoHeight, footerVideo } } = Astro.props;
+const { content: { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeight, video, videoWidth, videoHeight, footerVideo } } = Astro.props;
 ---
 
 <html lang="en">
-    <Head title={`${title} / ${SITE_TITLE}`} description={description} />
+    <Head title={`${title} / ${SITE_TITLE}`} description={description} image={thumbnail} />
     <body>
         <section class="main-wrapper">
             <Header />
