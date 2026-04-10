@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/post.astro
 tag: music
-thumbnail: /projects/thumb-kyrosounds.webp
-heroImage: /projects/hero-kyrosounds.webp
+thumbnail: /projects/kyrosounds/thumb-kyrosounds.webp
+heroImage: /projects/kyrosounds/hero-kyrosounds.webp
 heroImageWidth: 949
 heroImageHeight: 587
 title: Music Project "kyrosounds"

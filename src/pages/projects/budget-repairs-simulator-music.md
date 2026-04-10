@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: music
-thumbnail: /projects/thumb-budget-repairs-music.webp
+thumbnail: /projects/budget-repairs-simulator-music/thumb-budget-repairs-music.webp
 heroImage:
 title: Budget Repairs Gameplay Trailer Soundtrack
-video: /projects/budget-repairs-music.mp4
+video: /projects/budget-repairs-simulator-music/budget-repairs-music.mp4
 footerVideo: 
 category: music
 date: 20th Oct 2024

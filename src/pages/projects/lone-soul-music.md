@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: music
-thumbnail: /projects/thumb-lone-soul-music.webp
+thumbnail: /projects/lone-soul-music/thumb-lone-soul-music.webp
 heroImage:
 title: Lone Soul Menu Theme
-video: /projects/lone-soul-music.mp4
+video: /projects/lone-soul-music/lone-soul-music.mp4
 footerVideo: 
 category: music
 date: 27th Jan 2025

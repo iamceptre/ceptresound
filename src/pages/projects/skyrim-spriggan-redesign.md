@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-spriggan-deconstructed.webp
+thumbnail: /projects/skyrim-spriggan-redesign/thumb-spriggan-deconstructed.webp
 heroImage:
 title: How I Made Skyrim's Spriggan Sound
-video: /projects/spriggan-deconstructed.mp4
+video: /projects/skyrim-spriggan-redesign/spriggan-deconstructed.mp4
 footerVideo: 
 category: sound redesign
 date: 19th Nov 2024

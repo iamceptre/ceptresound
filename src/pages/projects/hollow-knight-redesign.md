@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-no-eyes.webp
+thumbnail: /projects/hollow-knight-redesign/thumb-no-eyes.webp
 heroImage: 
 title: Hollow Knight Boss Dissolve
-video: /projects/no-eyes.mp4
+video: /projects/hollow-knight-redesign/no-eyes.mp4
 footerVideo: 
 category: sound redesign
 date: 22th Nov 2024

@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-budget-repairs.webp
+thumbnail: /projects/budget-repairs-simulator/thumb-budget-repairs.webp
 heroImage:
 title: Budget Repairs Gameplay Trailer
-video: /projects/budget-repairs.mp4
+video: /projects/budget-repairs-simulator/budget-repairs.mp4
 footerVideo: 
 category: sound design
 date: 20th Oct 2024

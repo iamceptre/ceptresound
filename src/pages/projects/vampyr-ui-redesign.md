@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-vampyr-ui.webp
+thumbnail: /projects/vampyr-ui-redesign/thumb-vampyr-ui.webp
 heroImage:
 title: Vampyr Crafting UI
-video: /projects/vampyr-ui.mp4
+video: /projects/vampyr-ui-redesign/vampyr-ui.mp4
 footerVideo: 
 category: sound redesign
 date: 24th Nov 2024

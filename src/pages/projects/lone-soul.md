@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-lone-soul.webp
+thumbnail: /projects/lone-soul/thumb-lone-soul.webp
 heroImage:
 title: Lone Soul
-video: /projects/lone-soul.mp4
+video: /projects/lone-soul/lone-soul.mp4
 footerVideo: 
 category: sound redesign
 date: 27th Jan 2025

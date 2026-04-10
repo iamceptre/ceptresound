@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-lbp-ui.webp
+thumbnail: /projects/littlebigplanet-ui-redesign/thumb-lbp-ui.webp
 heroImage:
 title: LittleBigPlanet UI
-video: /projects/lbp-ui.mp4
+video: /projects/littlebigplanet-ui-redesign/lbp-ui.mp4
 footerVideo: 
 category: sound redesign
 date: 9th Nov 2024

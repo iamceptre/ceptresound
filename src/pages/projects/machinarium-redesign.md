@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-machinarium.webp
+thumbnail: /projects/machinarium-redesign/thumb-machinarium.webp
 heroImage:
 title: Machinarium
-video: /projects/machinarium.mp4
+video: /projects/machinarium-redesign/machinarium.mp4
 footerVideo: 
 category: music & sound redesign
 date: 6th Nov 2024

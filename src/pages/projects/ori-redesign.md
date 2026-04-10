@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-ori-kuro.webp
+thumbnail: /projects/ori-redesign/thumb-ori-kuro.webp
 heroImage:
 title: Ori and The Blind Forest (Kuro Cutscene)
-video: /projects/ori-kuro.mp4
+video: /projects/ori-redesign/ori-kuro.mp4
 footerVideo: 
 category: sound redesign
 date: 23th Nov 2024

@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/post.astro
 tag: visual-design
-thumbnail: /projects/thumb-graphic-towers.webp
-heroImage: /projects/graphic-towers.jpg
+thumbnail: /projects/graphic-towers/thumb-graphic-towers.webp
+heroImage: /projects/graphic-towers/graphic-towers.jpg
 heroImageWidth: 1000
 heroImageHeight: 1000
 title: Towers EP
@@ -19,7 +19,7 @@ createdAt: 2023/11/17
 
 <div>
  <i> Version I've got before my works: </i>
- <picture> <img src="/projects/graphic-towers-pre.jpg" alt="Version before my works" /></picture>
+ <picture> <img src="/projects/graphic-towers/graphic-towers-pre.jpg" alt="Version before my works" /></picture>
 </div>
 <br>
 <div>

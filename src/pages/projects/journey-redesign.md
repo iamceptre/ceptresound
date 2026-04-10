@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-journey.webp
+thumbnail: /projects/journey-redesign/thumb-journey.webp
 heroImage:
 title: Journey
-video: /projects/journey.mp4
+video: /projects/journey-redesign/journey.mp4
 footerVideo: 
 category: music & sound redesign
 date: 7th Nov 2024

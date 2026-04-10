@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-sandvich.webp
+thumbnail: /projects/sandvich-redesign/thumb-sandvich.webp
 heroImage: 
 title: Team Fortress 2 - Meet the Sandwich
-video: /projects/sandvich.mp4
+video: /projects/sandvich-redesign/sandvich.mp4
 footerVideo: 
 category: music & sound redesign
 date: 3th Nov 2024

@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-crysis-nanosuit.webp
+thumbnail: /projects/crysis-nanosuit/thumb-crysis-nanosuit.webp
 heroImage:
 title: Crysis 3 Nanosuit
-video: /projects/crysis-nanosuit.mp4
+video: /projects/crysis-nanosuit/crysis-nanosuit.mp4
 footerVideo: 
 category: sound redesign
 date: 21th Dec 2024

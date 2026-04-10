@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-sniper-elite-ballkill.webp
+thumbnail: /projects/sniper-elite-ballkill/thumb-sniper-elite-ballkill.webp
 heroImage:
 title: Sniper Elite 5 Nut Shot
-video: /projects/sniper-elite-ballkill.mp4
+video: /projects/sniper-elite-ballkill/sniper-elite-ballkill.mp4
 footerVideo: 
 category: sound redesign
 date: 13th Nov 2024

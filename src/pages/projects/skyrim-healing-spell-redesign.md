@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-skyrim-healing-spell.webp
+thumbnail: /projects/skyrim-healing-spell-redesign/thumb-skyrim-healing-spell.webp
 heroImage:
 title: Skyrim Healing Spell
-video: /projects/skyrim-healing-spell.mp4
+video: /projects/skyrim-healing-spell-redesign/skyrim-healing-spell.mp4
 footerVideo: 
 category: sound redesign
 date: 12th Nov 2024

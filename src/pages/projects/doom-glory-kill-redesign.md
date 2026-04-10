@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-doom-glory-kill.webp
+thumbnail: /projects/doom-glory-kill-redesign/thumb-doom-glory-kill.webp
 heroImage:
 title: DOOM Eternal Glory Kill
-video: /projects/doom-glory-kill.mp4
+video: /projects/doom-glory-kill-redesign/doom-glory-kill.mp4
 footerVideo: 
 category: sound redesign
 date: 26th Nov 2024

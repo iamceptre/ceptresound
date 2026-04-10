@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-thompson.webp
+thumbnail: /projects/cod-thompson-redesign/thumb-thompson.webp
 heroImage:
 title: Thompson Gunshots
-video: /projects/thompson.mp4
+video: /projects/cod-thompson-redesign/thompson.mp4
 footerVideo: 
 category: sound redesign
 date: 17th Apr 2023

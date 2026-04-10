@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/doom-mars.webp
+thumbnail: /projects/doom-mars-redesign/doom-mars.webp
 heroImage:
 title: DOOM Eternal Mars Destruction
-video: /projects/doom-mars.mp4
+video: /projects/doom-mars-redesign/doom-mars.mp4
 footerVideo: 
 category: sound redesign
 date: 5th Nov 2024

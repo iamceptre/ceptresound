@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: music
-thumbnail: /projects/thumb-eternal-sunshine.webp
+thumbnail: /projects/eternal-sunshine-redesign-and-music/thumb-eternal-sunshine.webp
 heroImage:
 title: Eternal Sunshine of The Spotless Mind
-video: /projects/eternal-sunshine.mp4
+video: /projects/eternal-sunshine-redesign-and-music/eternal-sunshine.mp4
 footerVideo: 
 category: music & sound redesign
 date: 28th Nov 2024

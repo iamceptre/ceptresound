@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/post.astro
 tag: sound-design
-thumbnail: /projects/thumb-sh3-geometry-room.webp
+thumbnail: /projects/silent-hill-3-geometry-room-redesign/thumb-sh3-geometry-room.webp
 heroImage:
 title: Silent Hill 3 Geometry Room
-video: /projects/sh-3-geometry-room.mp4
+video: /projects/silent-hill-3-geometry-room-redesign/sh-3-geometry-room.mp4
 videoWidth: 634
 videoHeight: 480
 footerVideo: 

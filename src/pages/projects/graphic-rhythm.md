@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/post.astro
 tag: visual-design
-thumbnail: /projects/thumb-graphic-rhythm.webp
-heroImage: /projects/graphic-rhythm.jpg
+thumbnail: /projects/graphic-rhythm/thumb-graphic-rhythm.webp
+heroImage: /projects/graphic-rhythm/graphic-rhythm.jpg
 heroImageWidth: 1000
 heroImageHeight: 1000
 title: Rhythm
