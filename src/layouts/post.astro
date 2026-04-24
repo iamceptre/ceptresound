@@ -6,25 +6,23 @@ import { SITE_TITLE } from '../config';
 import { Image } from 'astro:assets';
 
 export interface Props {
-    content: {
-        title: string;
-        description?: string;
-        thumbnail?: string;
-        heroImage?: string;
-        heroImageWidth?: number;
-        heroImageHeight?: number;
-        video?: string;
-        videoWidth?: number;
-        videoHeight?: number;
-        footerVideo?: string;
-    };
+    title: string;
+    description?: string | null;
+    thumbnail?: string | null;
+    heroImage?: string | null;
+    heroImageWidth?: number;
+    heroImageHeight?: number;
+    video?: string | null;
+    videoWidth?: number;
+    videoHeight?: number;
+    footerVideo?: string | null;
 }
 
-const { content: { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeight, video, videoWidth, videoHeight, footerVideo } } = Astro.props;
+const { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeight, video, videoWidth, videoHeight, footerVideo } = Astro.props;
 ---
 
 <html lang="en">
-    <Head title={`${title} / ${SITE_TITLE}`} description={description} image={thumbnail} />
+    <Head title={`${title} / ${SITE_TITLE}`} description={description ?? undefined} image={thumbnail ?? undefined} />
     <body>
         <section class="main-wrapper">
             <Header />

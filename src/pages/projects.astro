@@ -3,13 +3,14 @@ import Head from '../components/Head.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { SITE_TITLE } from '../config'
+import { getCollection } from 'astro:content'
 
-const allProjects = (await Astro.glob('./projects/*.md'))
+const allProjects = await getCollection('projects')
 
-const groupProjectsByTag = (projects: any[]) => {
-    const grouped: Record<string, any[]> = {}
+const groupProjectsByTag = (projects: typeof allProjects) => {
+    const grouped: Record<string, typeof allProjects> = {}
     projects.forEach((project) => {
-        const tag = project.frontmatter.tag
+        const tag = project.data.tag
         if (!grouped[tag]) grouped[tag] = []
         grouped[tag].push(project)
     })
@@ -22,7 +23,7 @@ const groupedProjects = groupProjectsByTag(allProjects)
 
 Object.values(groupedProjects).forEach((projects) => {
     projects.sort((a, b) =>
-        new Date(b.frontmatter.createdAt).valueOf() - new Date(a.frontmatter.createdAt).valueOf()
+        new Date(b.data.createdAt).valueOf() - new Date(a.data.createdAt).valueOf()
     )
 })
 
@@ -30,7 +31,7 @@ const formatLabel = (tag: string) =>
     tag.replace(/-+/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 
 const sections = Object.entries(groupedProjects)
-    .map(([tag, projects]: [string, any[]]) => ({
+    .map(([tag, projects]) => ({
         id: tag.toLowerCase().replace(/\s+/g, '-'),
         label: formatLabel(tag),
         projects,
@@ -57,22 +58,22 @@ const sections = Object.entries(groupedProjects)
                     <section id={id}>
                         <div class="category-label">{label}</div>
                         <div class="projects">
-                            {projects.map((project: any) => (
+                            {projects.map((project) => (
                                 <div class="project">
-                                    <a href={project.url}>
+                                    <a href={`/projects/${project.slug}`}>
                                         <img
-                                            src={project.frontmatter.thumbnail}
-                                            alt={project.frontmatter.title}
+                                            src={project.data.thumbnail}
+                                            alt={project.data.title}
                                             width="668"
                                             height="401"
                                             loading="lazy"
                                             decoding="async"
                                         />
                                         <div class="info-wrapper">
-                                            <div>{project.frontmatter.title}</div>
+                                            <div>{project.data.title}</div>
                                             <div class="meta">
-                                                <div>{project.frontmatter.date}</div>
-                                                <div>({project.frontmatter.category})</div>
+                                                <div>{project.data.date}</div>
+                                                <div>({project.data.category})</div>
                                             </div>
                                         </div>
                                     </a>
