@@ -164,9 +164,11 @@ import CopyToClipboard from './CopyToClipboard'
 
 <script>
     let spaceHandler: ((e: KeyboardEvent) => void) | null = null;
+    let fHandler: ((e: KeyboardEvent) => void) | null = null;
+    let clickBlurHandler: ((e: MouseEvent) => void) | null = null;
 
     const isMobile = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-    const isWebKit = () => navigator.vendor === 'Apple Computer, Inc.';
+    const isSafari = () => navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome');
 
     function setupMenu() {
         const checkbox = document.getElementById('menu-toggle') as HTMLInputElement | null;
@@ -200,10 +202,22 @@ import CopyToClipboard from './CopyToClipboard'
         }
     }
 
-    function setupSpacebar() {
+    function setupKeyboardShortcuts() {
         if (isMobile()) return;
 
         if (spaceHandler) document.removeEventListener('keydown', spaceHandler);
+        if (fHandler) document.removeEventListener('keydown', fHandler);
+        if (clickBlurHandler) document.removeEventListener('click', clickBlurHandler);
+
+        // Clicking a native video control (e.g. fullscreen button) focuses the video's
+        // UA shadow DOM. Blurring on the next frame prevents spacebar from re-activating
+        // that control instead of being handled by our keydown listener.
+        clickBlurHandler = (e: MouseEvent) => {
+            if (e.target instanceof HTMLVideoElement) {
+                requestAnimationFrame(() => (e.target as HTMLVideoElement).blur());
+            }
+        };
+        document.addEventListener('click', clickBlurHandler);
 
         spaceHandler = (e: KeyboardEvent) => {
             if (e.code !== 'Space') return;
@@ -229,11 +243,27 @@ import CopyToClipboard from './CopyToClipboard'
             }
         };
 
+        fHandler = (e: KeyboardEvent) => {
+            if (e.key !== 'f' && e.key !== 'F') return;
+            const tag = (document.activeElement as Element)?.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+            const video = document.querySelector<HTMLVideoElement>('video');
+            if (!video) return;
+            e.preventDefault();
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                video.style.visibility = 'visible';
+                video.requestFullscreen();
+            }
+        };
+
         document.addEventListener('keydown', spaceHandler);
+        document.addEventListener('keydown', fHandler);
     }
 
     function setupVideoThumbnails() {
-        if (isMobile() || isWebKit()) return;
+        if (isMobile() || isSafari()) return;
 
         for (const video of document.querySelectorAll<HTMLVideoElement>('video[poster="/black-16-9.png"]')) {
 
@@ -341,7 +371,7 @@ import CopyToClipboard from './CopyToClipboard'
         document.documentElement.classList.remove('is-transitioning');
         setupMenu();
         updateActiveLink();
-        setupSpacebar();
+        setupKeyboardShortcuts();
         setupVideoThumbnails();
     });
 </script>

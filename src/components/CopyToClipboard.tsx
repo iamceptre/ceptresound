@@ -28,7 +28,6 @@ const CopyToClipboard = () => {
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCopy() } }}
                 role="button"
                 tabIndex={0}
-                aria-live="polite"
                 style={{
                     cursor: 'pointer',
                     color: copied ? '#BDBDBD' : 'black',
@@ -50,10 +49,17 @@ const CopyToClipboard = () => {
                     whiteSpace: 'nowrap',
                     opacity: state === 'copied' ? 1 : 0,
                     transition: state === 'copied' ? 'opacity 0.166s ease' : 'opacity 0.5s ease',
-                }}>
+                }} aria-hidden="true">
                     Mail copied!
                 </div>
             )}
+            <span
+                aria-live="polite"
+                aria-atomic="true"
+                style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' }}
+            >
+                {copied ? 'Mail copied!' : ''}
+            </span>
         </div>
     )
 }

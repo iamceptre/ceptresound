@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css'
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 
 export interface Props {
     title: string
@@ -33,7 +33,7 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined
 
     <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
 
-    <ViewTransitions />
+    <ClientRouter />
 
     <script>
         function initImages() {

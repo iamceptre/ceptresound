@@ -24,7 +24,7 @@ const { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeigh
 <html lang="en">
     <Head title={`${title} / ${SITE_TITLE}`} description={description ?? undefined} image={thumbnail ?? undefined} />
     <body>
-        <section class="main-wrapper">
+        <div class="main-wrapper">
             <Header />
             <main>
                 <div class="media-wrapper">
@@ -74,7 +74,7 @@ const { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeigh
                 )}
             </main>
             <Footer />
-        </section>
+        </div>
     </body>
 </html>
 

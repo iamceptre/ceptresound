@@ -8,16 +8,16 @@ import { SITE_TITLE } from '../config'
 <html lang="en">
     <Head title={SITE_TITLE} />
     <body>
-        <section class="main-wrapper">
+        <div class="main-wrapper">
             <Header />
             <main>
                 <div>
-                    <div>
-                        I'm a Sound Designer and Music Producer with experience dating back to 2014.
-                        <br><br><p> I implement using <i>Wwise, MetaSound and FMOD</i>. <br><br></p>
-                        My background in game visuals and code helps me speak the team's language, which makes the whole collaboration a lot smoother.
+                    <div class="bio">
+                        <p>I'm a Sound Designer and Music Producer with experience dating back to 2014.</p>
+                        <p>I implement using <i>Wwise, MetaSound and FMOD</i>.</p>
+                        <p>My background in game visuals and code helps me speak the team's language, which makes the whole collaboration a lot smoother.</p>
                     </div>
-                      <section class="info-wrapper">
+                    <div class="info-wrapper">
                         <div>
                             <div class="category">Sound / Music</div>
                             <span>Ableton, Reaper, Nuendo, RX Pro</span>
@@ -30,7 +30,7 @@ import { SITE_TITLE } from '../config'
                             <div class="category">Game Development</div>
                             <span title="Unreal Engine 3, 4 & 5">Unity, Unreal Engine, Fmod, Wwise</span>
                         </div>
-                    </section>
+                    </div>
                 </div>
                 <div class="hero-wrapper">
                     <img
@@ -53,7 +53,7 @@ import { SITE_TITLE } from '../config'
                 </div>
             </main>
             <Footer />
-        </section>
+        </div>
     </body>
 </html>
 
@@ -107,6 +107,13 @@ import { SITE_TITLE } from '../config'
     main > div {
         display: grid;
         gap: var(--size-900);
+    }
+
+    .bio {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        line-height: 1.6;
     }
 
     .info-wrapper {

@@ -42,7 +42,7 @@ const sections = Object.entries(groupedProjects)
 <html lang="en">
     <Head title={`Projects / ${SITE_TITLE}`} />
     <body>
-        <section class="main-wrapper">
+        <div class="main-wrapper">
             <Header />
             <main>
                 <div class="category-nav">
@@ -60,7 +60,7 @@ const sections = Object.entries(groupedProjects)
                         <div class="projects">
                             {projects.map((project) => (
                                 <div class="project">
-                                    <a href={`/projects/${project.slug}`}>
+                                    <a href={`/projects/${project.id}`}>
                                         <img
                                             src={project.data.thumbnail}
                                             alt={project.data.title}
@@ -84,7 +84,7 @@ const sections = Object.entries(groupedProjects)
                 ))}
             </main>
             <Footer />
-        </section>
+        </div>
     </body>
 </html>
 

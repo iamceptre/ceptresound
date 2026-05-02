@@ -105,10 +105,6 @@ hr {
     border-bottom: solid 1px var(--cl-grey-900);
 }
 
-.email {
-    cursor: pointer;
-}
-
 .main-wrapper {
     min-height: calc(100svh - var(--size-700) * 2);
     display: grid;
@@ -123,12 +119,5 @@ hr {
 }
 
 .logo img {
-    max-width: 2rem;
-    height: 2rem;
     opacity: 1;
-}
-
-.category {
-    color: var(--cl-grey-800);
-
 }
