@@ -43,9 +43,8 @@ const { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeigh
                     {video && (
                         <video
                             controls
-                            preload="auto"
+                            preload="metadata"
                             class="video"
-                            poster="/black-16-9.png"
                             playsinline
                             width={videoWidth ?? 1280}
                             height={videoHeight ?? 720}
@@ -55,7 +54,7 @@ const { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeigh
                         </video>
                     )}
                 </div>
-                <div class="title">{title}</div>
+                <h1 class="title">{title}</h1>
                 <hr />
                 <slot />
                 {footerVideo && (
@@ -63,7 +62,6 @@ const { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeigh
                         controls
                         preload="metadata"
                         class="footer-video"
-                        poster="/black-16-9.png"
                         playsinline
                         width={videoWidth ?? 1280}
                         height={videoHeight ?? 720}

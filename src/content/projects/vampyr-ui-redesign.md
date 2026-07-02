@@ -3,7 +3,10 @@ tag: sound-design
 thumbnail: /projects/vampyr-ui-redesign/thumb-vampyr-ui.webp
 heroImage:
 title: Vampyr Crafting UI
+description: A sound redesign of Vampyr's alchemy crafting UI, using water and glass bottle sounds paired with fire for a skeuomorphic feel.
 video: /projects/vampyr-ui-redesign/vampyr-ui.mp4
+videoWidth: 1280
+videoHeight: 752
 footerVideo: 
 category: sound redesign
 date: 24th Nov 2024

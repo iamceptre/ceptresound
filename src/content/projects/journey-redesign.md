@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/journey-redesign/thumb-journey.webp
 heroImage:
 title: Journey
+description: A music and sound redesign for a scene from Journey (2012) by Thatgamecompany, with bell tones shaped from a genie head massager recording.
 video: /projects/journey-redesign/journey.mp4
 footerVideo: 
 category: music & sound redesign

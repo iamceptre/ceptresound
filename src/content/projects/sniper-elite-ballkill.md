@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/sniper-elite-ballkill/thumb-sniper-elite-ballkill.webp
 heroImage:
 title: Sniper Elite 5 Nut Shot
+description: A sound redesign of the Sniper Elite 5 testicle kill slow-motion effect, layering processed jet sounds and warped bullet ricochets.
 video: /projects/sniper-elite-ballkill/sniper-elite-ballkill.mp4
 footerVideo: 
 category: sound redesign

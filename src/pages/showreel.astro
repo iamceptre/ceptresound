@@ -11,7 +11,8 @@ import { SITE_TITLE } from '../config'
         <div class="main-wrapper">
             <Header />
             <main>
-                <video id="showreel-video" controls preload="auto" class="responsive-video" poster="/black-16-9.png" playsinline width="1280" height="720">
+                <h1 class="visually-hidden">Showreel 2025 — Łukasz Brandeburg</h1>
+                <video id="showreel-video" controls preload="metadata" class="responsive-video" playsinline width="1280" height="720">
                     <source src="/showreel-current.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
@@ -31,5 +32,11 @@ import { SITE_TITLE } from '../config'
         width: 62vw;
         max-width: 100%;
         height: auto;
+    }
+
+    @media screen and (max-width: 60rem) {
+        .responsive-video {
+            width: 92vw;
+        }
     }
 </style>

@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css'
-import { ClientRouter } from 'astro:transitions'
 
 export interface Props {
     title: string
@@ -33,14 +32,12 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined
 
     <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
 
-    <ClientRouter />
-
     <script>
         function initImages() {
             document.querySelectorAll<HTMLImageElement>('img:not([data-manual-fade])').forEach(img => {
                 if (img.classList.contains('visible')) return
                 if (img.complete && img.naturalWidth > 0) {
-                    img.classList.add('visible')
+                    requestAnimationFrame(() => img.classList.add('visible'))
                 } else if (img.getAttribute('src')) {
                     img.addEventListener('load',  () => img.classList.add('visible'), { once: true })
                     img.addEventListener('error', () => img.classList.add('visible'), { once: true })
@@ -50,7 +47,6 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined
 
         initImages()
         window.addEventListener('pageshow', (e) => { if (e.persisted) initImages() })
-        document.addEventListener('astro:page-load', initImages)
 
         function openExternalLinks() {
             document.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(link => {
@@ -61,6 +57,5 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined
             })
         }
         openExternalLinks()
-        document.addEventListener('astro:page-load', openExternalLinks)
     </script>
 </head>

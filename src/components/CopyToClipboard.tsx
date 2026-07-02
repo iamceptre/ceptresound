@@ -40,7 +40,8 @@ const CopyToClipboard = () => {
                 <div style={{
                     position: 'absolute',
                     top: '-25px',
-                    left: '0',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
                     background: '#737473',
                     color: '#fff',
                     padding: '4px 8px',
@@ -50,7 +51,7 @@ const CopyToClipboard = () => {
                     opacity: state === 'copied' ? 1 : 0,
                     transition: state === 'copied' ? 'opacity 0.166s ease' : 'opacity 0.5s ease',
                 }} aria-hidden="true">
-                    Mail copied!
+                    Mail copied
                 </div>
             )}
             <span
@@ -58,7 +59,7 @@ const CopyToClipboard = () => {
                 aria-atomic="true"
                 style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap' }}
             >
-                {copied ? 'Mail copied!' : ''}
+                {copied ? 'Mail copied' : ''}
             </span>
         </div>
     )

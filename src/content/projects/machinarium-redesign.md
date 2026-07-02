@@ -3,7 +3,10 @@ tag: sound-design
 thumbnail: /projects/machinarium-redesign/thumb-machinarium.webp
 heroImage:
 title: Machinarium
+description: A music and sound redesign for Machinarium (2009) by Amanita Design, built entirely from pressure recordings like valve air bursts and soda openings.
 video: /projects/machinarium-redesign/machinarium.mp4
+videoWidth: 1280
+videoHeight: 811
 footerVideo: 
 category: music & sound redesign
 date: 6th Nov 2024

@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/sandvich-redesign/thumb-sandvich.webp
 heroImage: 
 title: Team Fortress 2 - Meet the Sandwich
+description: A music and sound redesign of the "Meet the Sandvich" short from Team Fortress 2 by Valve.
 video: /projects/sandvich-redesign/sandvich.mp4
 footerVideo: 
 category: music & sound redesign

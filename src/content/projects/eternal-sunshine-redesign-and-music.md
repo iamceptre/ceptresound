@@ -3,7 +3,10 @@ tag: music
 thumbnail: /projects/eternal-sunshine-redesign-and-music/thumb-eternal-sunshine.webp
 heroImage:
 title: Eternal Sunshine of The Spotless Mind
+description: A music and sound redesign for a scene from Eternal Sunshine of the Spotless Mind, with a piano that falls apart as the sound grows more abstract.
 video: /projects/eternal-sunshine-redesign-and-music/eternal-sunshine.mp4
+videoWidth: 1334
+videoHeight: 720
 footerVideo: 
 category: music & sound redesign
 date: 28th Nov 2024

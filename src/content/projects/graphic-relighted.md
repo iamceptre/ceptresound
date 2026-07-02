@@ -2,9 +2,10 @@
 tag: visual-design
 thumbnail: /projects/graphic-relighted/thumb-relighted.webp
 heroImage: /projects/graphic-relighted/graphic-spaces.jpg
-heroImageWidth: 3000
-heroImageHeight: 3000
+heroImageWidth: 1600
+heroImageHeight: 1600
 title: Relighted Visual Series
+description: A visual series for the album "Relighted," pairing hand-drawn pencil sketches with digital graphic design.
 video:
 footerVideo:
 category: cover art design
@@ -17,7 +18,7 @@ createdAt: 2026/04/10
 <br>
 
 <div>
-  <picture><img src="/projects/graphic-relighted/graphic-underlying.jpg" alt="Relighted — Underlying" /></picture>
+  <picture><img src="/projects/graphic-relighted/graphic-underlying.jpg" alt="Relighted — Underlying" width="1600" height="1600" /></picture>
 </div>
 <br>
 <p>

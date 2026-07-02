@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/budget-repairs-simulator/thumb-budget-repairs.webp
 heroImage:
 title: Budget Repairs Gameplay Trailer
+description: Sound design for a chaotic DIY home-renovation game trailer, built almost entirely from self-recorded power tools, tiles, and construction ambience.
 video: /projects/budget-repairs-simulator/budget-repairs.mp4
 footerVideo: 
 category: sound design

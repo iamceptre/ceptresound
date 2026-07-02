@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/crysis-nanosuit/thumb-crysis-nanosuit.webp
 heroImage:
 title: Crysis 3 Nanosuit
+description: A sound redesign of the Crysis 3 Nanosuit, covering ambience, processed voice, and distinct sonic identities for each suit ability.
 video: /projects/crysis-nanosuit/crysis-nanosuit.mp4
 footerVideo: 
 category: sound redesign

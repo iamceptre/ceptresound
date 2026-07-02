@@ -1,10 +1,11 @@
 ---
 tag: music
 thumbnail: /projects/ceptre/thumb-ceptre.webp
-heroImage: /projects/ceptre/hero-ceptre.png
+heroImage: /projects/ceptre/hero-ceptre.jpg
 heroImageWidth: 915
 heroImageHeight: 565
 title: Music Project "Ceptre"
+description: Ceptre is Łukasz Brandeburg's personal music project since 2023, focused mainly on Drum & Bass.
 video:
 footerVideo: 
 category: music alias

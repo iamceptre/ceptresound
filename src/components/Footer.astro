@@ -1,14 +1,29 @@
+---
+import CopyToClipboard from './CopyToClipboard'
+---
+
 <hr>
 <footer>
-    <div class="current-year">@{new Date().getFullYear()}</div>
-    <div class="info-wrapper"> Currently in: Łódź, Poland </div>
+    <div class="top-row">
+        <div class="current-year">@{new Date().getFullYear()}</div>
+        <div class="info-wrapper"> Currently in: Łódź, Poland </div>
+    </div>
+    <div class="mobile-email">
+        <CopyToClipboard client:visible />
+    </div>
 </footer>
 
 <style>
     footer {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 0.5rem;
         font-size: var(--size-400);
+    }
+
+    .top-row {
+        display: flex;
+        justify-content: space-between;
     }
 
     .current-year {
@@ -18,5 +33,20 @@
     .info-wrapper {
         display: flex;
         gap: 1rem;
+    }
+
+    .mobile-email {
+        display: none;
+    }
+
+    @media screen and (max-width: 60rem) {
+        .top-row {
+            display: none;
+        }
+
+        .mobile-email {
+            display: flex;
+            justify-content: center;
+        }
     }
 </style>

@@ -3,7 +3,10 @@ tag: music
 thumbnail: /projects/lone-soul-music/thumb-lone-soul-music.webp
 heroImage:
 title: Lone Soul Menu Theme
+description: A main menu theme proposal composed for Lone Soul by Laughing Fox Games, built on floating harmonics and reverberant, mystical atmosphere.
 video: /projects/lone-soul-music/lone-soul-music.mp4
+videoWidth: 1280
+videoHeight: 726
 footerVideo: 
 category: music
 date: 27th Jan 2025

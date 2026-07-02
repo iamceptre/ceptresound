@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/cod-thompson-redesign/thumb-thompson.webp
 heroImage:
 title: Thompson Gunshots
+description: "A sound redesign of the M1928 Thompson submachine gun from Call of Duty: Vanguard."
 video: /projects/cod-thompson-redesign/thompson.mp4
 footerVideo: 
 category: sound redesign

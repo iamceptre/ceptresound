@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/littlebigplanet-ui-redesign/thumb-lbp-ui.webp
 heroImage:
 title: LittleBigPlanet UI
+description: A sound redesign of LittleBigPlanet 3's UI, built from tiny mouth pops, finger footsteps, and bottle openings tuned to a C Major scale.
 video: /projects/littlebigplanet-ui-redesign/lbp-ui.mp4
 footerVideo: 
 category: sound redesign

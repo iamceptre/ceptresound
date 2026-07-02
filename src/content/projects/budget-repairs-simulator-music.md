@@ -3,6 +3,7 @@ tag: music
 thumbnail: /projects/budget-repairs-simulator-music/thumb-budget-repairs-music.webp
 heroImage:
 title: Budget Repairs Gameplay Trailer Soundtrack
+description: An original Disco Polo-style soundtrack composed for Majster Symulator's gameplay trailer, made with a Yamaha DX7 and classic drum machine sounds.
 video: /projects/budget-repairs-simulator-music/budget-repairs-music.mp4
 footerVideo: 
 category: music

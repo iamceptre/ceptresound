@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/silent-hill-3-geometry-room-redesign/thumb-sh3-geometry-room.webp
 heroImage:
 title: Silent Hill 3 Geometry Room
+description: A sound redesign of the Geometry Room transformation scene from Silent Hill 3, built for an unnerving, terrifying atmosphere.
 video: /projects/silent-hill-3-geometry-room-redesign/sh-3-geometry-room.mp4
 videoWidth: 634
 videoHeight: 480

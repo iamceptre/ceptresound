@@ -25,7 +25,7 @@ import hero from '../assets/about.jpg'
                         />
                     </div>
                     <div class="info-wrapper">
-                        <div class="name">Hi, I'm Łukasz, also known as "Ceptre"</div>
+                        <h1 class="name">Hi, I'm Łukasz, also known as "Ceptre"</h1>
                         <div class="desc">
                             <div>
                                 Games pulled me into sound in 2014, and I've never quite recovered
@@ -140,10 +140,12 @@ import hero from '../assets/about.jpg'
         .achievements {
             display: flex;
             flex-direction: column;
+            gap: var(--size-500);
         }
 
         img {
             width: 320px;
+            max-width: 100%;
         }
     }
 </style>

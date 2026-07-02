@@ -6,15 +6,16 @@ import { SITE_TITLE } from '../config'
 ---
 
 <html lang="en">
-    <Head title={SITE_TITLE} />
+    <Head title={SITE_TITLE} description="Sound Designer, Music Producer and Composer based in Łódź, Poland." image="/hero.jpg" />
     <body>
         <div class="main-wrapper">
             <Header />
             <main>
+                <h1 class="visually-hidden">Łukasz Brandeburg — Sound Designer, Music Producer &amp; Composer</h1>
                 <div>
                     <div class="bio">
                         <p>I'm a Sound Designer and Music Producer with experience dating back to 2014.</p>
-                        <p>I implement using <i>Wwise, MetaSound and FMOD</i>.</p>
+                        <p>I implement using <i>MetaSound, FMOD and Wwise</i>.</p>
                         <p>My background in game visuals and code helps me speak the team's language, which makes the whole collaboration a lot smoother.</p>
                     </div>
                     <div class="info-wrapper">
@@ -67,7 +68,7 @@ import { SITE_TITLE } from '../config'
         full.classList.remove('visible')
 
         if (low.complete && low.naturalWidth > 0) {
-            low.classList.add('visible')
+            requestAnimationFrame(() => low.classList.add('visible'))
         } else {
             low.addEventListener('load', () => low.classList.add('visible'), { once: true })
         }
@@ -82,7 +83,6 @@ import { SITE_TITLE } from '../config'
 
     initHero()
     window.addEventListener('pageshow', (e) => { if (e.persisted) initHero() })
-    document.addEventListener('astro:page-load', initHero)
 </script>
 
 <style>
@@ -141,6 +141,7 @@ import { SITE_TITLE } from '../config'
 
         img {
             width: 320px;
+            max-width: 100%;
         }
     }
 </style>

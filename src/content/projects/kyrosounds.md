@@ -5,6 +5,7 @@ heroImage: /projects/kyrosounds/hero-kyrosounds.webp
 heroImageWidth: 949
 heroImageHeight: 587
 title: Music Project "kyrosounds"
+description: kyrosounds is Łukasz Brandeburg's personal music project since 2021, composing ambient pieces.
 video:
 footerVideo: 
 category: music alias

@@ -3,7 +3,10 @@ tag: sound-design
 thumbnail: /projects/hollow-knight-redesign/thumb-no-eyes.webp
 heroImage: 
 title: Hollow Knight Boss Dissolve
+description: A sound redesign of Hollow Knight's "No Eyes" boss dissolve, using tuned ambience and deliberate silence for an emotional, sorrowful feel.
 video: /projects/hollow-knight-redesign/no-eyes.mp4
+videoWidth: 1280
+videoHeight: 751
 footerVideo: 
 category: sound redesign
 date: 22th Nov 2024

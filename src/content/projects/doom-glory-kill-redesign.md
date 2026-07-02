@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/doom-glory-kill-redesign/thumb-doom-glory-kill.webp
 heroImage:
 title: DOOM Eternal Glory Kill
+description: A sound redesign of a DOOM Eternal glory kill, built from pitched-down pig recordings and layered impact detail, made for 2024 Noisevember.
 video: /projects/doom-glory-kill-redesign/doom-glory-kill.mp4
 footerVideo: 
 category: sound redesign

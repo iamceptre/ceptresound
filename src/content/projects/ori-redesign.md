@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/ori-redesign/thumb-ori-kuro.webp
 heroImage:
 title: Ori and The Blind Forest - Kuro Cutscene
+description: A sound redesign of the Kuro cutscene from Ori and the Blind Forest, with a dark, mysterious wildlife soundscape.
 video: /projects/ori-redesign/ori-kuro.mp4
 footerVideo: 
 category: sound redesign

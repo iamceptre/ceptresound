@@ -150,7 +150,6 @@ import CopyToClipboard from './CopyToClipboard'
             height: 100%;
             background-color: var(--cl-bg);
             transition: right 0.15s ease;
-            view-transition-name: none;
             z-index: 50;
         }
 
@@ -189,17 +188,6 @@ import CopyToClipboard from './CopyToClipboard'
 
             if (!open) window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-    }
-
-    function updateActiveLink() {
-        const current = window.location.pathname.replace(/\/$/, '') || '/';
-        for (const link of document.querySelectorAll<HTMLAnchorElement>('nav a[href]')) {
-            const href = (link.getAttribute('href') ?? '').replace(/\/$/, '') || '/';
-            const active = current === href;
-            link.classList.toggle('active', active);
-            if (active) link.setAttribute('aria-current', 'page');
-            else link.removeAttribute('aria-current');
-        }
     }
 
     function setupKeyboardShortcuts() {
@@ -254,6 +242,7 @@ import CopyToClipboard from './CopyToClipboard'
                 document.exitFullscreen();
             } else {
                 video.style.visibility = 'visible';
+                video.classList.add('visible');
                 video.requestFullscreen();
             }
         };
@@ -263,9 +252,16 @@ import CopyToClipboard from './CopyToClipboard'
     }
 
     function setupVideoThumbnails() {
-        if (isMobile() || isSafari()) return;
+        const videos = document.querySelectorAll<HTMLVideoElement>('video');
 
-        for (const video of document.querySelectorAll<HTMLVideoElement>('video[poster="/black-16-9.png"]')) {
+        if (isMobile() || isSafari()) {
+            for (const video of videos) {
+                requestAnimationFrame(() => video.classList.add('visible'));
+            }
+            return;
+        }
+
+        for (const video of videos) {
 
             video.style.visibility = 'hidden';
 
@@ -278,7 +274,7 @@ import CopyToClipboard from './CopyToClipboard'
                     video.currentTime = 0;
 
                     const wrap = document.createElement('div');
-                    wrap.className = video.className;
+                    wrap.className = `${video.className} video-thumb-wrap`;
                     wrap.style.cssText = 'position:relative;line-height:0;';
                     video.removeAttribute('class');
                     video.style.cssText = 'width:100%;height:auto;display:block;visibility:hidden;';
@@ -289,8 +285,10 @@ import CopyToClipboard from './CopyToClipboard'
                     thumb.src = canvas.toDataURL('image/jpeg', 0.8)
                     thumb.alt = ''
                     thumb.setAttribute('aria-hidden', 'true');
+                    // opacity:1 inline overrides the global img{opacity:0} rule — the thumb
+                    // itself doesn't fade independently, it rides along with wrap's fade below.
                     thumb.style.cssText =
-                        'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;';
+                        'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:1;';
 
                     const playBtn = document.createElement('div');
                     playBtn.setAttribute('aria-hidden', 'true');
@@ -307,15 +305,25 @@ import CopyToClipboard from './CopyToClipboard'
                     overlay.style.cssText = 'position:absolute;inset:0;cursor:pointer;';
 
                     wrap.appendChild(thumb)
-                    requestAnimationFrame(() => thumb.classList.add('visible'))
                     wrap.appendChild(playBtn);
                     wrap.appendChild(overlay);
+
+                    // wrap is brand new — never painted before — so a single rAF isn't
+                    // enough to guarantee the browser has actually painted its opacity:0
+                    // state before we flip it to visible. If the rAF callback runs before
+                    // that first paint, there's no "before" frame for the CSS transition to
+                    // animate from and it just pops straight to visible. Nesting the rAF
+                    // forces us to wait a full extra frame, guaranteeing that first paint
+                    // already happened. Fading wrap (rather than the thumb alone) makes the
+                    // thumbnail, play button and video frame appear together as one unit.
+                    requestAnimationFrame(() => requestAnimationFrame(() => wrap.classList.add('visible')))
 
                     video.addEventListener('play', () => {
                         thumb.remove();
                         playBtn.remove();
                         overlay.remove();
                         video.style.visibility = 'visible';
+                        video.classList.add('visible');
                     }, { once: true });
 
                     overlay.addEventListener('click', (e) => {
@@ -334,10 +342,14 @@ import CopyToClipboard from './CopyToClipboard'
 
                 } catch {
                     video.style.visibility = 'visible';
+                    video.classList.add('visible');
                 }
             };
 
-            const showFallback = () => { video.style.visibility = 'visible'; };
+            const showFallback = () => {
+                video.style.visibility = 'visible';
+                video.classList.add('visible');
+            };
 
             const seekAndBuild = () => {
                 video.currentTime = Math.min(video.duration * 0.1, 1);
@@ -363,15 +375,7 @@ import CopyToClipboard from './CopyToClipboard'
         }
     }
 
-    document.addEventListener('astro:before-preparation', () => {
-        document.documentElement.classList.add('is-transitioning');
-    });
-
-    document.addEventListener('astro:page-load', () => {
-        document.documentElement.classList.remove('is-transitioning');
-        setupMenu();
-        updateActiveLink();
-        setupKeyboardShortcuts();
-        setupVideoThumbnails();
-    });
+    setupMenu();
+    setupKeyboardShortcuts();
+    setupVideoThumbnails();
 </script>

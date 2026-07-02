@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/doom-mars-redesign/doom-mars.webp
 heroImage:
 title: DOOM Eternal Mars Destruction
+description: A resonant sound redesign of the BFG 10000 Mars destruction scene from DOOM Eternal, built from recordings of large metal charity containers.
 video: /projects/doom-mars-redesign/doom-mars.mp4
 footerVideo: 
 category: sound redesign

@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/silent-hill-2-remake-great-knife-redesign/thumb-silent-hill-2-remake-great-knife.webp
 heroImage:
 title: Silent Hill 2 Remake - Great Knife
+description: Reflections on the audio of Silent Hill 2 Remake by Bloober Team, alongside a Great Knife sound redesign using self-recorded footsteps and breathing.
 video: /projects/silent-hill-2-remake-great-knife-redesign/sh2-remake-great-knife.mp4
 footerVideo: 
 category: sound redesign

@@ -4,6 +4,21 @@
     font-display: swap;
 }
 
+/* A fallback sized/shaped to match Inter's own metrics (values are the Inter
+   project's published fallback overrides). Without this, the system fallback used
+   before Inter loads has different line-height/character widths, so the belated
+   swap reflows every line of text on the page at once — invisible in realtime, but
+   a real whole-page "zoom"-looking jump frame-by-frame, worse on slow connections.
+   With matched metrics the swap barely moves anything. */
+@font-face {
+    font-family: 'Inter Fallback';
+    src: local('Arial');
+    ascent-override: 90.44%;
+    descent-override: 22.52%;
+    line-gap-override: 0%;
+    size-adjust: 107.4%;
+}
+
 :root {
     --cl-bg: hsl(0, 0%, 92%);
     --cl-bg-secondary: hsl(0, 0%, 85%);
@@ -21,26 +36,9 @@
     --size-font: 0.9375rem;
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation-duration: 66.666ms;
-    background-color: var(--cl-bg);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-        animation: none;
-    }
-}
-
 @keyframes video-flash {
     0%   { opacity: 0.12; }
     100% { opacity: 0; }
-}
-
-html.is-transitioning {
-    overflow: hidden;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -83,9 +81,36 @@ img.visible {
     opacity: 1;
 }
 
+video {
+    opacity: 0;
+    transition: opacity 200ms ease 33.333ms;
+}
+
+video.visible {
+    opacity: 1;
+}
+
+.video-thumb-wrap {
+    opacity: 0;
+    transition: opacity 200ms ease 33.333ms;
+}
+
+.video-thumb-wrap.visible {
+    opacity: 1;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
 body {
     background-color: var(--cl-bg);
-    font-family: Inter;
+    font-family: Inter, 'Inter Fallback', sans-serif;
     font-size: var(--size-font);
     color: var(--cl-text);
     -webkit-font-smoothing: antialiased;

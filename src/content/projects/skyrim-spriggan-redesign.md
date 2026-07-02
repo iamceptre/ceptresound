@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/skyrim-spriggan-redesign/thumb-spriggan-deconstructed.webp
 heroImage:
 title: How I Made Skyrim's Spriggan Sound
+description: A layer-by-layer breakdown of a Skyrim Spriggan sound redesign, built from foliage, rotten wood, and animal vocalizations.
 video: /projects/skyrim-spriggan-redesign/spriggan-deconstructed.mp4
 footerVideo: 
 category: sound redesign

@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/lone-soul/thumb-lone-soul.webp
 heroImage:
 title: Lone Soul
+description: A sound redesign for Lone Soul by Laughing Fox Games, covering spell incantations, sword attacks, and enemy dissolves with synthesized, layered sound.
 video: /projects/lone-soul/lone-soul.mp4
 footerVideo: 
 category: sound redesign

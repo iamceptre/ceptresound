@@ -3,6 +3,7 @@ tag: sound-design
 thumbnail: /projects/skyrim-healing-spell-redesign/thumb-skyrim-healing-spell.webp
 heroImage:
 title: Skyrim Healing Spell
+description: A sound redesign of Skyrim's Healing Spell, built from stretched cymbals, granular glass hits, and pitched hang drum layers.
 video: /projects/skyrim-healing-spell-redesign/skyrim-healing-spell.mp4
 footerVideo: 
 category: sound redesign

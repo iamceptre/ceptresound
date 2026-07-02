@@ -40,11 +40,12 @@ const sections = Object.entries(groupedProjects)
 ---
 
 <html lang="en">
-    <Head title={`Projects / ${SITE_TITLE}`} />
+    <Head title={`Projects / ${SITE_TITLE}`} description="Sound design, music, and visual design projects by Łukasz Brandeburg." />
     <body>
         <div class="main-wrapper">
             <Header />
             <main>
+                <h1 class="visually-hidden">Projects</h1>
                 <div class="category-nav">
                     {sections.map(({ id, label }, i) => (
                         <>
@@ -56,7 +57,7 @@ const sections = Object.entries(groupedProjects)
                 <hr>
                 {sections.map(({ id, label, projects }) => (
                     <section id={id}>
-                        <div class="category-label">{label}</div>
+                        <h2 class="category-label">{label}</h2>
                         <div class="projects">
                             {projects.map((project) => (
                                 <div class="project">
