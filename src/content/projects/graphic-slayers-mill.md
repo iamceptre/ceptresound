@@ -1,9 +1,9 @@
 ---
 tag: visual-design
 thumbnail: /projects/graphic-slayers-mill/thumb-graphic-slayers-mill.webp
-heroImage: /projects/graphic-slayers-mill/graphic-slayers-mill.jpg
-heroImageWidth: 1600
-heroImageHeight: 1600
+heroImage: /projects/graphic-slayers-mill/graphic-slayers-mill.webp
+heroImageWidth: 1280
+heroImageHeight: 1280
 title: Slayers Mill
 description: Cover art design for a collaborative track with dust, released under the Kyroshie alias, composited from 19th-century paintings.
 video:

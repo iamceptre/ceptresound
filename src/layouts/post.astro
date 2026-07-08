@@ -3,7 +3,6 @@ import Head from '../components/Head.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE } from '../config';
-import { Image } from 'astro:assets';
 
 export interface Props {
     title: string;
@@ -22,53 +21,55 @@ const { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeigh
 ---
 
 <html lang="en">
-    <Head title={`${title} / ${SITE_TITLE}`} description={description ?? undefined} image={thumbnail ?? undefined} />
+    <Head title={`${title} / ${SITE_TITLE}`} description={description ?? undefined} image={thumbnail ?? undefined} preloadImage={heroImage ?? undefined} />
     <body>
         <div class="main-wrapper">
             <Header />
             <main>
                 <div class="media-wrapper">
                     {heroImage && (
-                        <Image
+                        <img
                             class="hero-image"
                             src={heroImage}
                             width={heroImageWidth ?? 1280}
                             height={heroImageHeight ?? 720}
-                            quality={90}
                             loading="eager"
                             fetchpriority="high"
+                            decoding="async"
                             alt=""
                         />
                     )}
                     {video && (
-                        <video
-                            controls
-                            preload="metadata"
-                            class="video"
-                            playsinline
-                            width={videoWidth ?? 1280}
-                            height={videoHeight ?? 720}
-                        >
-                            <source src={video} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
+                        <div class="video-shell video">
+                            <video
+                                controls
+                                preload="metadata"
+                                playsinline
+                                width={videoWidth ?? 1280}
+                                height={videoHeight ?? 720}
+                            >
+                                <source src={video} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
                     )}
                 </div>
                 <h1 class="title">{title}</h1>
                 <hr />
                 <slot />
                 {footerVideo && (
-                    <video
-                        controls
-                        preload="metadata"
-                        class="footer-video"
-                        playsinline
-                        width={videoWidth ?? 1280}
-                        height={videoHeight ?? 720}
-                    >
-                        <source src={footerVideo} type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
+                    <div class="video-shell footer-video">
+                        <video
+                            controls
+                            preload="metadata"
+                            playsinline
+                            width={videoWidth ?? 1280}
+                            height={videoHeight ?? 720}
+                        >
+                            <source src={footerVideo} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 )}
             </main>
             <Footer />
@@ -115,7 +116,7 @@ const { title, description, thumbnail, heroImage, heroImageWidth, heroImageHeigh
     :global(ul),
     :global(ol)      { padding-left: 1.5rem; margin-bottom: 1rem; }
     :global(li)      { margin-bottom: 0.5rem; }
-    :global(a)       { text-decoration-style: solid; color: black; }
+    :global(a)       { text-decoration-style: solid; color: var(--cl-text); }
     :global(i)       { font-style: italic; color: var(--cl-grey-800); margin-bottom: 0.5rem; }
     :global(b)       { font-weight: 600; }
 </style>

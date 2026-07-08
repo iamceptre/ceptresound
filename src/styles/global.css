@@ -20,12 +20,15 @@
 }
 
 :root {
+    color-scheme: light;
+
     --cl-bg: hsl(0, 0%, 92%);
     --cl-bg-secondary: hsl(0, 0%, 85%);
     --cl-grey-900: hsl(0, 0%, 80%);
     --cl-grey-800: hsl(0, 0%, 40%);
 
     --cl-text: #151515;
+    --cl-text-dim: #BDBDBD;
 
     --scale: 1.2;
     --size-900: calc(1rem * pow(var(--scale), 9));
@@ -36,9 +39,146 @@
     --size-font: 0.9375rem;
 }
 
+/* Dark theme: an exact lightness mirror of the light greyscale ramp
+   (92→8, 85→14, 80→22, 40→62, 8→92, 74→26). color-scheme: dark switches
+   native UI (video controls, scrollbars, form widgets) to their dark variants.
+
+   Activation: system preference by default, overridable by the header toggle,
+   which sets data-theme="light"|"dark" on <html> (persisted in localStorage,
+   applied pre-paint by the inline script in Head.astro). The two blocks below
+   must stay identical — one covers "system dark, not overridden to light",
+   the other "explicitly overridden to dark". */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+
+        --cl-bg: hsl(0, 0%, 8%);
+        --cl-bg-secondary: hsl(0, 0%, 14%);
+        --cl-grey-900: hsl(0, 0%, 22%);
+        --cl-grey-800: hsl(0, 0%, 62%);
+
+        --cl-text: #ebebeb;
+        --cl-text-dim: #424242;
+    }
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --cl-bg: hsl(0, 0%, 8%);
+    --cl-bg-secondary: hsl(0, 0%, 14%);
+    --cl-grey-900: hsl(0, 0%, 22%);
+    --cl-grey-800: hsl(0, 0%, 62%);
+
+    --cl-text: #ebebeb;
+    --cl-text-dim: #424242;
+}
+
 @keyframes video-flash {
     0%   { opacity: 0.12; }
     100% { opacity: 0; }
+}
+
+/* Server-rendered video placeholder: black backing, play button (::before)
+   and loading ring (::after) are pure CSS, visible from the first paint —
+   they must not depend on the JS bundle, which arrives late on slow
+   connections. The Header script only layers interactivity on top and
+   advances the state classes:
+     .thumb-ready — captured thumbnail inserted → ring hidden
+     .video-live  — playback started / fallback → play button hidden too
+   Fixed white-on-black colors: this always sits on video content,
+   regardless of theme. */
+.video-shell {
+    position: relative;
+    line-height: 0;
+    background: #000;
+    /* One grouped entrance for the whole unit — backing, play button and
+       loading ring fade in together on page load. A CSS animation (not JS)
+       so it also runs before the bundle arrives on slow connections. */
+    animation: video-shell-in 400ms ease both;
+}
+
+@keyframes video-shell-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.video-shell > video {
+    width: 100%;
+    height: auto;
+}
+
+/* The play button starts hidden and crossfades in as the ring fades out
+   (.thumb-ready): while the video is downloading only the ring shows.
+   Both pseudos center with inset:0 + margin:auto and border-box sizing —
+   the global * reset does not reach pseudo-elements, and a content-box
+   border would shift the ring 3px down-right of the button's center. */
+.video-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 64px;
+    height: 64px;
+    z-index: 2;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='rgba(0,0,0,0.45)'/%3E%3Cpolygon points='20.6,14.9 20.6,49.1 50.3,32.0' fill='white'/%3E%3C/svg%3E") center/contain no-repeat;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    opacity: 0;
+    transition: opacity 200ms ease;
+    pointer-events: none;
+}
+
+.video-shell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    box-sizing: border-box;
+    width: 76px;
+    height: 76px;
+    z-index: 3;
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: spinner-rotate 0.9s linear infinite;
+    opacity: 1;
+    transition: opacity 200ms ease;
+    pointer-events: none;
+}
+
+.video-shell.thumb-ready::before { opacity: 1; }
+.video-shell.thumb-ready::after  { opacity: 0; }
+
+.video-shell.video-live::after,
+.video-shell.video-live::before {
+    content: none;
+}
+
+@keyframes spinner-rotate {
+    to { transform: rotate(360deg); }
+}
+
+/* Applied to <html> by setupThemeToggle() only for the instant of a theme
+   switch, then removed — so the crossfade never interferes with the site's
+   normal transitions (image fades, menu slide, hamburger morph) outside
+   that ~100ms window. !important lets it temporarily win over elements
+   that declare their own transition shorthand, giving one uniform fade. */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+    transition:
+        background-color 50ms ease,
+        color 50ms ease,
+        border-color 50ms ease,
+        filter 50ms ease !important;
+}
+
+/* The toggle itself must not fade — its icon swaps instantly and any
+   transition on it reads as unwanted motion on the sun/moon glyph. */
+.theme-transition .theme-toggle,
+.theme-transition .theme-toggle * {
+    transition: none !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -87,15 +227,6 @@ video {
 }
 
 video.visible {
-    opacity: 1;
-}
-
-.video-thumb-wrap {
-    opacity: 0;
-    transition: opacity 200ms ease 33.333ms;
-}
-
-.video-thumb-wrap.visible {
     opacity: 1;
 }
 

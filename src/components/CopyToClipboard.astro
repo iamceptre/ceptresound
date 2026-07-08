@@ -1,0 +1,83 @@
+---
+const EMAIL = 'brandeburglukasz@gmail.com'
+---
+
+<div class="copy-email">
+    <span class="email" role="button" tabindex="0" title="Copy to clipboard">{EMAIL}</span>
+    <div class="tooltip" aria-hidden="true">Mail copied</div>
+    <span class="announce visually-hidden" aria-live="polite" aria-atomic="true"></span>
+</div>
+
+<style>
+    .copy-email {
+        position: relative;
+        display: inline-block;
+    }
+
+    .email {
+        cursor: pointer;
+        color: var(--cl-text);
+        transition: color 0.166s ease;
+    }
+
+    .copy-email.copied .email {
+        color: var(--cl-text-dim);
+    }
+
+    .copy-email.fading .email {
+        transition: color 0.5s ease;
+    }
+
+    .tooltip {
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #737473;
+        color: #fff;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .copy-email.copied .tooltip {
+        opacity: 1;
+        transition: opacity 0.166s ease;
+    }
+</style>
+
+<script>
+    const EMAIL = 'brandeburglukasz@gmail.com'
+
+    for (const root of document.querySelectorAll<HTMLElement>('.copy-email')) {
+        const announce = root.querySelector('.announce')!
+        let timers: ReturnType<typeof setTimeout>[] = []
+
+        const copy = async () => {
+            try {
+                await navigator.clipboard.writeText(EMAIL)
+            } catch (e) {
+                console.error('Copy failed:', e)
+                return
+            }
+            timers.forEach(clearTimeout)
+            root.classList.remove('fading')
+            root.classList.add('copied')
+            announce.textContent = 'Mail copied'
+            timers = [
+                setTimeout(() => { root.classList.add('fading'); root.classList.remove('copied') }, 1000),
+                setTimeout(() => { root.classList.remove('fading'); announce.textContent = '' }, 1500),
+            ]
+        }
+
+        const trigger = root.querySelector<HTMLElement>('.email')!
+        trigger.addEventListener('click', copy)
+        trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copy() }
+        })
+    }
+</script>

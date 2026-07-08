@@ -1,9 +1,9 @@
 ---
 tag: visual-design
 thumbnail: /projects/graphic-angels/thumb-graphic-angels.webp
-heroImage: /projects/graphic-angels/graphic-angels.jpg
-heroImageWidth: 3000
-heroImageHeight: 3000
+heroImage: /projects/graphic-angels/graphic-angels.webp
+heroImageWidth: 1280
+heroImageHeight: 1280
 title: Angels
 description: Cover art design for the self-released track "Angels," built around Gustave Doré's 1870 illustration "Jupiter."
 video:

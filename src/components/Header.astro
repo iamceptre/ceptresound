@@ -8,7 +8,7 @@ const navLinks = [
     { href: '/projects', label: 'Projects' },
 ];
 
-import CopyToClipboard from './CopyToClipboard'
+import CopyToClipboard from './CopyToClipboard.astro'
 ---
 
 <header>
@@ -23,7 +23,7 @@ import CopyToClipboard from './CopyToClipboard'
     </div>
 
     <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle" class="menu-button-wrapper" aria-label="Toggle navigation">
+    <label for="menu-toggle" class="menu-button-wrapper" role="button" tabindex="0" aria-label="Toggle navigation" aria-expanded="false">
         <div class="menu-button"></div>
     </label>
 
@@ -40,7 +40,19 @@ import CopyToClipboard from './CopyToClipboard'
     </nav>
 
     <div class="email-wrapper">
-        <CopyToClipboard client:visible />
+        <CopyToClipboard />
+        <button class="theme-toggle" aria-label="Dark mode" aria-pressed="false">
+            <svg class="icon-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+        </button>
     </div>
 </header>
 <hr>
@@ -61,7 +73,7 @@ import CopyToClipboard from './CopyToClipboard'
 
     a {
         text-decoration: none;
-        color: black;
+        color: var(--cl-text);
     }
 
     .active {
@@ -87,7 +99,7 @@ import CopyToClipboard from './CopyToClipboard'
     .menu-button::after {
         content: '';
         display: block;
-        background-color: black;
+        background-color: var(--cl-text);
         position: absolute;
         height: 2px;
         width: 1.25rem;
@@ -106,7 +118,42 @@ import CopyToClipboard from './CopyToClipboard'
         transform: rotate(-45deg);
     }
 
-    .email-wrapper { text-align: end; }
+    .email-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: var(--size-500);
+    }
+
+    .theme-toggle {
+        display: flex;
+        align-items: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--cl-text);
+    }
+
+    .theme-toggle:hover {
+        color: var(--cl-grey-800);
+    }
+
+    /* Icon reflects the theme a click switches AWAY from: moon while light
+       is active, sun while dark is active. Same system-or-override logic as
+       the token blocks in global.css, resolved purely in CSS so the right
+       icon shows even before JS runs. */
+    .icon-sun { display: none; }
+
+    @media (prefers-color-scheme: dark) {
+        :global(:root:not([data-theme="light"])) .icon-moon { display: none; }
+        :global(:root:not([data-theme="light"])) .icon-sun  { display: block; }
+    }
+
+    :global(:root[data-theme="dark"]) .icon-moon { display: none; }
+    :global(:root[data-theme="dark"]) .icon-sun  { display: block; }
+
+    :global(:root[data-theme="light"]) .icon-moon { display: block; }
+    :global(:root[data-theme="light"]) .icon-sun  { display: none; }
 
     .logo {
         display: flex;
@@ -118,6 +165,13 @@ import CopyToClipboard from './CopyToClipboard'
         max-width: 2rem;
         height: 2rem;
     }
+
+    /* The logo is a black glyph on transparency — flip it to white on dark. */
+    @media (prefers-color-scheme: dark) {
+        :global(:root:not([data-theme="light"])) .logo img { filter: invert(1); }
+    }
+
+    :global(:root[data-theme="dark"]) .logo img { filter: invert(1); }
 
     .logo > div {
         display: flex;
@@ -137,7 +191,7 @@ import CopyToClipboard from './CopyToClipboard'
 
     @media screen and (max-width: 60rem) {
         header {
-            grid-template-columns: 1fr min-content;
+            grid-template-columns: 1fr min-content min-content;
             gap: 1rem;
         }
 
@@ -153,19 +207,20 @@ import CopyToClipboard from './CopyToClipboard'
             z-index: 50;
         }
 
-        .menu-button-wrapper { display: block; }
+        /* Hamburger stays at the outer edge, theme toggle beside it. */
+        .menu-button-wrapper { display: block; order: 1; }
 
         #menu-toggle:checked ~ nav { right: 0; }
 
-        .email-wrapper { display: none; }
+        /* Only the email hides on mobile (it moves to the footer) — the
+           theme toggle inside the same wrapper stays. It has no z-index, so
+           the fullscreen nav overlay (z-index 50) covers it while the menu
+           is open; only the close button (z-index 60) stays on top. */
+        .email-wrapper :global(.copy-email) { display: none; }
     }
 </style>
 
 <script>
-    let spaceHandler: ((e: KeyboardEvent) => void) | null = null;
-    let fHandler: ((e: KeyboardEvent) => void) | null = null;
-    let clickBlurHandler: ((e: MouseEvent) => void) | null = null;
-
     const isMobile = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
     const isSafari = () => navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome');
 
@@ -174,8 +229,20 @@ import CopyToClipboard from './CopyToClipboard'
         if (checkbox) checkbox.checked = false;
         document.documentElement.style.overflow = '';
 
+        // The label toggles the checkbox on click natively, but labels aren't part of
+        // the tab order — Enter/Space here makes the menu reachable by keyboard.
+        const label = document.querySelector<HTMLElement>('.menu-button-wrapper');
+        label?.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+            if (!checkbox) return;
+            checkbox.checked = !checkbox.checked;
+            checkbox.dispatchEvent(new Event('change'));
+        });
+
         checkbox?.addEventListener('change', () => {
             const open = checkbox.checked;
+            label?.setAttribute('aria-expanded', String(open));
             document.documentElement.style.overflow = open ? 'hidden' : '';
 
             for (const v of document.getElementsByTagName('video')) {
@@ -190,65 +257,103 @@ import CopyToClipboard from './CopyToClipboard'
         });
     }
 
+    function setupThemeToggle() {
+        const btn = document.querySelector<HTMLButtonElement>('.theme-toggle');
+        if (!btn) return;
+
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+        const effective = () =>
+            document.documentElement.dataset.theme ?? (systemDark.matches ? 'dark' : 'light');
+
+        // The static theme-color metas are media-query based, which a manual
+        // override can't influence — keep them in sync from here instead.
+        const apply = () => {
+            const dark = effective() === 'dark';
+            const bg = dark ? 'hsl(0, 0%, 8%)' : 'hsl(0, 0%, 92%)';
+            document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', bg));
+            btn.setAttribute('aria-pressed', String(dark));
+            const label = dark ? 'Switch to light mode' : 'Switch to dark mode';
+            btn.title = label;
+            btn.setAttribute('aria-label', label);
+        };
+        apply();
+
+        // Enables the 50ms crossfade (see .theme-transition in global.css) just
+        // around the swap. The class must be present in the same style recalc as
+        // the theme change for the transition to catch it, and is lifted again
+        // once the fade is over so normal per-element transitions resume.
+        let fadeTimer: ReturnType<typeof setTimeout>;
+        const withCrossfade = (change: () => void) => {
+            document.documentElement.classList.add('theme-transition');
+            change();
+            clearTimeout(fadeTimer);
+            fadeTimer = setTimeout(() => document.documentElement.classList.remove('theme-transition'), 100);
+        };
+
+        btn.addEventListener('click', () => withCrossfade(() => {
+            const next = effective() === 'dark' ? 'light' : 'dark';
+            if ((next === 'dark') === systemDark.matches) {
+                // Choosing what the system already prefers — drop the override
+                // so the site goes back to following the OS setting live.
+                delete document.documentElement.dataset.theme;
+                try { localStorage.removeItem('theme'); } catch {}
+            } else {
+                document.documentElement.dataset.theme = next;
+                try { localStorage.setItem('theme', next); } catch {}
+            }
+            apply();
+        }));
+
+        systemDark.addEventListener('change', () => withCrossfade(apply));
+    }
+
     function setupKeyboardShortcuts() {
         if (isMobile()) return;
-
-        if (spaceHandler) document.removeEventListener('keydown', spaceHandler);
-        if (fHandler) document.removeEventListener('keydown', fHandler);
-        if (clickBlurHandler) document.removeEventListener('click', clickBlurHandler);
 
         // Clicking a native video control (e.g. fullscreen button) focuses the video's
         // UA shadow DOM. Blurring on the next frame prevents spacebar from re-activating
         // that control instead of being handled by our keydown listener.
-        clickBlurHandler = (e: MouseEvent) => {
+        document.addEventListener('click', (e: MouseEvent) => {
             if (e.target instanceof HTMLVideoElement) {
                 requestAnimationFrame(() => (e.target as HTMLVideoElement).blur());
             }
-        };
-        document.addEventListener('click', clickBlurHandler);
+        });
 
-        spaceHandler = (e: KeyboardEvent) => {
-            if (e.code !== 'Space') return;
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
+            const isSpace = e.code === 'Space';
+            const isF = e.key === 'f' || e.key === 'F';
+            if (!isSpace && !isF) return;
+
             const tag = (document.activeElement as Element)?.tagName;
-            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'BUTTON') return;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || (isSpace && tag === 'BUTTON')) return;
             const video = document.querySelector<HTMLVideoElement>('video');
             if (!video) return;
             e.preventDefault();
-            if (video.paused) {
-                const wrap = video.parentElement;
-                if (wrap instanceof HTMLElement && getComputedStyle(wrap).position === 'relative') {
-                    const flash = document.createElement('div');
-                    flash.setAttribute('aria-hidden', 'true');
-                    flash.style.cssText =
-                        'position:absolute;inset:0;background:white;pointer-events:none;' +
-                        'animation:video-flash 200ms ease forwards;';
-                    wrap.appendChild(flash);
-                    flash.addEventListener('animationend', () => flash.remove(), { once: true });
+
+            if (isSpace) {
+                if (video.paused) {
+                    const wrap = video.parentElement;
+                    if (wrap instanceof HTMLElement && getComputedStyle(wrap).position === 'relative') {
+                        const flash = document.createElement('div');
+                        flash.setAttribute('aria-hidden', 'true');
+                        flash.style.cssText =
+                            'position:absolute;inset:0;background:white;pointer-events:none;' +
+                            'animation:video-flash 200ms ease forwards;';
+                        wrap.appendChild(flash);
+                        flash.addEventListener('animationend', () => flash.remove(), { once: true });
+                    }
+                    video.play();
+                } else {
+                    video.pause();
                 }
-                video.play();
-            } else {
-                video.pause();
-            }
-        };
-
-        fHandler = (e: KeyboardEvent) => {
-            if (e.key !== 'f' && e.key !== 'F') return;
-            const tag = (document.activeElement as Element)?.tagName;
-            if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-            const video = document.querySelector<HTMLVideoElement>('video');
-            if (!video) return;
-            e.preventDefault();
-            if (document.fullscreenElement) {
+            } else if (document.fullscreenElement) {
                 document.exitFullscreen();
             } else {
                 video.style.visibility = 'visible';
                 video.classList.add('visible');
                 video.requestFullscreen();
             }
-        };
-
-        document.addEventListener('keydown', spaceHandler);
-        document.addEventListener('keydown', fHandler);
+        });
     }
 
     function setupVideoThumbnails() {
@@ -256,6 +361,7 @@ import CopyToClipboard from './CopyToClipboard'
 
         if (isMobile() || isSafari()) {
             for (const video of videos) {
+                video.closest('.video-shell')?.classList.add('video-live');
                 requestAnimationFrame(() => video.classList.add('visible'));
             }
             return;
@@ -263,7 +369,51 @@ import CopyToClipboard from './CopyToClipboard'
 
         for (const video of videos) {
 
+            // The black placeholder, play button and loading ring are all static
+            // (.video-shell in global.css), visible from the first paint — this
+            // script only adds interactivity on top, so a slow connection that
+            // delays the JS bundle never delays the loading UI.
+            const shell = video.closest<HTMLElement>('.video-shell');
+            if (!shell) {
+                video.classList.add('visible');
+                continue;
+            }
+
             video.style.visibility = 'hidden';
+
+            const overlay = document.createElement('button');
+            overlay.setAttribute('aria-label', 'Play video');
+            overlay.style.cssText = 'position:absolute;inset:0;z-index:4;cursor:pointer;background:none;border:none;';
+            shell.appendChild(overlay);
+
+            let thumb: HTMLImageElement | null = null;
+            let cleaned = false;
+
+            const cleanup = () => {
+                if (cleaned) return;
+                cleaned = true;
+                shell.classList.add('video-live');
+                thumb?.remove();
+                overlay.remove();
+                video.style.visibility = 'visible';
+                video.classList.add('visible');
+            };
+
+            video.addEventListener('play', cleanup, { once: true });
+
+            overlay.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                const flash = document.createElement('div');
+                flash.setAttribute('aria-hidden', 'true');
+                flash.style.cssText =
+                    'position:absolute;inset:0;z-index:5;background:white;pointer-events:none;' +
+                    'animation:video-flash 200ms ease forwards;';
+                shell.appendChild(flash);
+                flash.addEventListener('animationend', () => flash.remove(), { once: true });
+
+                video.play();
+            }, { once: true });
 
             const build = () => {
                 try {
@@ -273,86 +423,36 @@ import CopyToClipboard from './CopyToClipboard'
                     canvas.getContext('2d')!.drawImage(video, 0, 0);
                     video.currentTime = 0;
 
-                    const wrap = document.createElement('div');
-                    wrap.className = `${video.className} video-thumb-wrap`;
-                    wrap.style.cssText = 'position:relative;line-height:0;';
-                    video.removeAttribute('class');
-                    video.style.cssText = 'width:100%;height:auto;display:block;visibility:hidden;';
-                    video.parentElement!.insertBefore(wrap, video);
-                    wrap.appendChild(video);
-
-                    const thumb = document.createElement('img')
-                    thumb.src = canvas.toDataURL('image/jpeg', 0.8)
-                    thumb.alt = ''
+                    thumb = document.createElement('img');
+                    thumb.src = canvas.toDataURL('image/jpeg', 0.8);
+                    thumb.alt = '';
                     thumb.setAttribute('aria-hidden', 'true');
-                    // opacity:1 inline overrides the global img{opacity:0} rule — the thumb
-                    // itself doesn't fade independently, it rides along with wrap's fade below.
                     thumb.style.cssText =
-                        'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:1;';
+                        'position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;pointer-events:none;' +
+                        'opacity:0;transition:opacity 200ms ease;';
+                    shell.appendChild(thumb);
+                    shell.classList.add('thumb-ready');
 
-                    const playBtn = document.createElement('div');
-                    playBtn.setAttribute('aria-hidden', 'true');
-                    playBtn.style.cssText =
-                        'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;';
-                    playBtn.innerHTML =
-                        '<svg viewBox="0 0 64 64" width="64" height="64" xmlns="http://www.w3.org/2000/svg"' +
-                        ' style="filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))">' +
-                        '<circle cx="32" cy="32" r="32" fill="rgba(0,0,0,.45)"/>' +
-                        '<polygon points="20.6,14.9 20.6,49.1 50.3,32.0" fill="white"/>' +
-                        '</svg>';
-
-                    const overlay = document.createElement('div');
-                    overlay.style.cssText = 'position:absolute;inset:0;cursor:pointer;';
-
-                    wrap.appendChild(thumb)
-                    wrap.appendChild(playBtn);
-                    wrap.appendChild(overlay);
-
-                    // wrap is brand new — never painted before — so a single rAF isn't
-                    // enough to guarantee the browser has actually painted its opacity:0
-                    // state before we flip it to visible. If the rAF callback runs before
-                    // that first paint, there's no "before" frame for the CSS transition to
-                    // animate from and it just pops straight to visible. Nesting the rAF
-                    // forces us to wait a full extra frame, guaranteeing that first paint
-                    // already happened. Fading wrap (rather than the thumb alone) makes the
-                    // thumbnail, play button and video frame appear together as one unit.
-                    requestAnimationFrame(() => requestAnimationFrame(() => wrap.classList.add('visible')))
-
-                    video.addEventListener('play', () => {
-                        thumb.remove();
-                        playBtn.remove();
-                        overlay.remove();
-                        video.style.visibility = 'visible';
-                        video.classList.add('visible');
-                    }, { once: true });
-
-                    overlay.addEventListener('click', (e) => {
-                        e.stopPropagation();
-
-                        const flash = document.createElement('div');
-                        flash.setAttribute('aria-hidden', 'true');
-                        flash.style.cssText =
-                            'position:absolute;inset:0;background:white;pointer-events:none;' +
-                            'animation:video-flash 200ms ease forwards;';
-                        wrap.appendChild(flash);
-                        flash.addEventListener('animationend', () => flash.remove(), { once: true });
-
-                        video.play();
-                    }, { once: true });
-
+                    // thumb is brand new — never painted before — so a single rAF isn't
+                    // enough to guarantee the browser painted its opacity:0 state before
+                    // we flip it. The nested rAF waits one full extra frame, so the
+                    // captured frame fades in behind the play button instead of popping.
+                    requestAnimationFrame(() => requestAnimationFrame(() => {
+                        if (thumb) thumb.style.opacity = '1';
+                    }));
                 } catch {
-                    video.style.visibility = 'visible';
-                    video.classList.add('visible');
+                    // Frame capture failed (e.g. tainted canvas) — the placeholder and
+                    // play button still work without a thumbnail; just stop the ring.
+                    shell.classList.add('thumb-ready');
                 }
             };
 
-            const showFallback = () => {
-                video.style.visibility = 'visible';
-                video.classList.add('visible');
-            };
+            const showFallback = cleanup;
 
             const seekAndBuild = () => {
-                video.currentTime = Math.min(video.duration * 0.1, 1);
+                // Seeking is what makes Chrome download the video — and it fetches the
+                // whole file once asked to seek, regardless of how small the target is.
+                video.currentTime = Math.min(video.duration * 0.1, 0.3);
                 const seekTimeout = setTimeout(showFallback, 3000);
                 video.addEventListener('seeked', () => {
                     clearTimeout(seekTimeout);
@@ -360,22 +460,54 @@ import CopyToClipboard from './CopyToClipboard'
                 }, { once: true });
             };
 
-            video.addEventListener('error', showFallback, { once: true });
+            const startCapture = () => {
+                if (cleaned) return;
 
-            if (video.readyState >= 1) {
-                seekAndBuild();
-            } else {
-                if (video.preload === 'none') video.preload = 'metadata';
-                const metaTimeout = setTimeout(showFallback, 5000);
-                video.addEventListener('loadedmetadata', () => {
-                    clearTimeout(metaTimeout);
+                video.addEventListener('error', showFallback, { once: true });
+
+                if (video.readyState >= 1) {
                     seekAndBuild();
-                }, { once: true });
-            }
+                } else {
+                    if (video.preload === 'none') video.preload = 'metadata';
+                    const metaTimeout = setTimeout(showFallback, 5000);
+                    video.addEventListener('loadedmetadata', () => {
+                        clearTimeout(metaTimeout);
+                        seekAndBuild();
+                    }, { once: true });
+                }
+            };
+
+            // The capture's seek triggers a full-file download, so hold it back
+            // until (a) the page has fully loaded — text, fonts and images win
+            // the bandwidth race — and (b) the video is actually near the
+            // viewport, so below-the-fold videos cost nothing until scrolled to.
+            // The static loading ring covers the wait; clicking play any time
+            // just starts native playback.
+            const whenIdle = (fn: () => void) => {
+                if (document.readyState === 'complete') fn();
+                else window.addEventListener('load', fn, { once: true });
+            };
+
+            whenIdle(() => {
+                if (cleaned) return;
+                if (!('IntersectionObserver' in window)) {
+                    startCapture();
+                    return;
+                }
+                const io = new IntersectionObserver((entries) => {
+                    if (entries.some(e => e.isIntersecting)) {
+                        io.disconnect();
+                        startCapture();
+                    }
+                }, { rootMargin: '200px' });
+                io.observe(shell);
+                video.addEventListener('play', () => io.disconnect(), { once: true });
+            });
         }
     }
 
     setupMenu();
+    setupThemeToggle();
     setupKeyboardShortcuts();
     setupVideoThumbnails();
 </script>

@@ -1,23 +1,32 @@
 ---
+// The first inline script below applies a stored theme override before first
+// paint. It must stay is:inline — a bundled/deferred script would run after
+// render and flash the wrong theme — and comment-free, since inline script
+// contents ship verbatim in every page's HTML.
 import '../styles/global.css'
 
 export interface Props {
     title: string
     description?: string
     image?: string
+    preloadImage?: string
 }
 
-const { title, description, image } = Astro.props
+const { title, description, image, preloadImage } = Astro.props
 const ogImage = image ? new URL(image, Astro.site).toString() : undefined
+const canonical = new URL(Astro.url.pathname, Astro.site).toString()
 ---
 
 <head>
     <meta charset="utf-8" />
+    <script is:inline>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="hsl(0, 0%, 92%)" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="hsl(0, 0%, 8%)" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <meta name="title" content={title} />
+    <link rel="canonical" href={canonical} />
     {description && <meta name="description" content={description} />}
 
     <meta property="og:type"  content="website" />
@@ -31,17 +40,24 @@ const ogImage = image ? new URL(image, Astro.site).toString() : undefined
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
     <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+    {preloadImage && <link rel="preload" href={preloadImage} as="image" fetchpriority="high" />}
 
     <script>
+        const reveal = (img: HTMLImageElement) => {
+            if (!img.hasAttribute('data-manual-fade')) img.classList.add('visible')
+        }
+
+        // load/error don't bubble, but they do capture — two document-level
+        // listeners cover every image (present and future) instead of a pair
+        // of listeners per <img>. Errors reveal too, so a broken image never
+        // stays invisible.
+        document.addEventListener('load',  (e) => { if (e.target instanceof HTMLImageElement) reveal(e.target) }, true)
+        document.addEventListener('error', (e) => { if (e.target instanceof HTMLImageElement) reveal(e.target) }, true)
+
+        // Images already complete before this script ran (cache hits, bfcache).
         function initImages() {
-            document.querySelectorAll<HTMLImageElement>('img:not([data-manual-fade])').forEach(img => {
-                if (img.classList.contains('visible')) return
-                if (img.complete && img.naturalWidth > 0) {
-                    requestAnimationFrame(() => img.classList.add('visible'))
-                } else if (img.getAttribute('src')) {
-                    img.addEventListener('load',  () => img.classList.add('visible'), { once: true })
-                    img.addEventListener('error', () => img.classList.add('visible'), { once: true })
-                }
+            document.querySelectorAll<HTMLImageElement>('img').forEach(img => {
+                if (img.complete && img.naturalWidth > 0) requestAnimationFrame(() => reveal(img))
             })
         }
 

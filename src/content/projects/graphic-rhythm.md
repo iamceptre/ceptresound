@@ -1,9 +1,9 @@
 ---
 tag: visual-design
 thumbnail: /projects/graphic-rhythm/thumb-graphic-rhythm.webp
-heroImage: /projects/graphic-rhythm/graphic-rhythm.jpg
-heroImageWidth: 1600
-heroImageHeight: 1600
+heroImage: /projects/graphic-rhythm/graphic-rhythm.webp
+heroImageWidth: 1280
+heroImageHeight: 1280
 title: Rhythm
 description: Cover art design for the self-released track "Rhythm," built around an 1861 Gustave Doré illustration from "Les contes drolatiques."
 video:
