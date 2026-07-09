@@ -12,22 +12,17 @@ category: cover art design
 date: 10th Apr 2026
 createdAt: 2026/04/10
 ---
-<div>
-  A visual series created for my album <b>Relighted</b> — graphic design by me, original pencil sketches by my girlfriend. Each piece pairs her hand-drawn illustrations with my digital graphic work. More visuals coming as the album develops.
-</div>
+
+<p>A visual series created for my album <b>Relighted</b> - graphic design by me, original pencil sketches by my girlfriend. Each piece pairs her hand-drawn illustrations with my digital graphic work. More visuals coming as the album develops.</p>
 <br>
 
 <div>
-  <picture><img src="/projects/graphic-relighted/graphic-underlying.webp" alt="Relighted — Underlying" width="1280" height="1280" loading="lazy" decoding="async" /></picture>
+  <picture><img src="/projects/graphic-relighted/graphic-underlying.webp" alt="Relighted - Underlying" width="1280" height="1280" loading="lazy" decoding="async" /></picture>
 </div>
 <br>
-<p>
-<div>
-<i>Tools used:</i>
-<p>
+
+<h3>Tools Used</h3>
 <ul>
-<li>Adobe Photoshop</li>
-<li>a Pencil</li>
-</p>
+  <li>Adobe Photoshop</li>
+  <li>a pencil</li>
 </ul>
-</div>

@@ -10,16 +10,18 @@ category: music & sound redesign
 date: 7th Nov 2024
 createdAt: 2024/11/07
 ---
-<h2>🌟 Glowing Soundscape</h2>
 
-<p>It was challenging but equally fun to make the main bell sounds from a recording of the genie head massager, tuned by ear to match the other musical elements I composed today.</p>
+<h2>Glowing Soundscape</h2>
+
+<p>It was challenging but equally fun to build the main bell sounds from a recording of a genie head massager, tuned by ear to match the other musical elements I composed for this piece.</p>
 
 <h3>Game</h3>
-<p>🎈Journey (2012) by Thatgamecompany, Tricky Pixels, Santa Monica Studio🌌</p>
+<p><a href="https://thatgamecompany.com/journey/">Journey (2012)</a> by Thatgamecompany, Tricky Pixels & Santa Monica Studio</p>
+<br>
 <div>
   This redesign is a part of my 2024 Noisevember, Day 07: Glow.
 </div>
 <br>
 <div>
-    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one piece of audio every day in November.</i>
+  <i>Noisevember is a creative challenge hosted by <a href="https://www.airwiggles.com">Airwiggles</a>, where participants create and share one piece of audio every day in November.</i>
 </div>

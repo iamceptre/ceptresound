@@ -10,22 +10,28 @@ category: sound redesign
 date: 26th Nov 2024
 createdAt: 2024/11/26
 ---
-<h3>⛥ Demon Vocalization</h3>
+
+<p>A DOOM Eternal glory kill, rebuilt from the ground up - from the demon's voice to the final, visceral impact.</p>
+
+<h3>Demon Vocalization</h3>
 <ul>
   <li><b>Pitched-down pig recordings:</b> Two layers were used. Both are pitched down, but one retains its original formant pitch, creating artifacts that resemble breathy throat textures.</li>
 </ul>
 
-<h3>🔥 Impact and Details</h3>
+<h3>Impact and Details</h3>
 <ul>
   <li><b>First hit:</b> Includes a subtle crunch layer to emphasize the skull break.</li>
-  <li><b>Second hit:</b> Designed to feel more wet, emphasizing the visceral nature.</li>
-  <li><b>Third hit:</b> Features an eye pop sound, created using a high-pitched balloon rub screech recording, ending with a pitched-up balloon pop. (eww)</li>
+  <li><b>Second hit:</b> Designed to feel wetter, emphasizing the visceral nature.</li>
+  <li><b>Third hit:</b> Features an eye pop created from a high-pitched balloon rub screech, ending with a pitched-up balloon pop. <i>(eww)</i></li>
 </ul>
+
+<h3>Game</h3>
+<p><a href="https://store.steampowered.com/app/782330/DOOM_Eternal/">DOOM Eternal (2020)</a> by id Software</p>
 <br>
 <div>
   This redesign is a part of my 2024 Noisevember, Day 26: Radical.
 </div>
 <br>
 <div>
-    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one piece of audio every day in November.</i>
+  <i>Noisevember is a creative challenge hosted by <a href="https://www.airwiggles.com">Airwiggles</a>, where participants create and share one piece of audio every day in November.</i>
 </div>

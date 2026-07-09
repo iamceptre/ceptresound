@@ -10,26 +10,30 @@ category: sound redesign
 date: 12th Nov 2024
 createdAt: 2024/11/12
 ---
-<h2>✨ Shimmering Skyrim Healing Spell</h2>
 
-<p>Skyrim's Healing Spell Redesigned using:</p>
+<h2>Shimmering Skyrim Healing Spell</h2>
+
+<p>Skyrim's Healing spell, redesigned using:</p>
 <ul>
-  <li> <b>Stacked, stretched, and pitched ride cymbals:</b> Brought to life with volume LFOs.</li>
-  <li> <b>Granularly played glass resonant hits:</b> Forming a chord and accompanied by a fire sizzle with multiband volume modulations.</li>
-  <li> <b>Pitched hang drum hits:</b> With a lot of reverb, providing lower-frequency support without being too "in your face."</li>
+  <li><b>Stacked, stretched, and pitched ride cymbals:</b> Brought to life with volume LFOs.</li>
+  <li><b>Granularly played glass resonant hits:</b> Forming a chord, accompanied by a fire sizzle with multiband volume modulations.</li>
+  <li><b>Pitched hang drum hits:</b> With a lot of reverb, providing lower-frequency support without being too "in your face."</li>
 </ul>
 
-<h3>🪔 Initial Ignition</h3>
+<h3>Initial Ignition</h3>
 <ul>
-  <li> Various lit torch movement sounds</li>
-  <li> Rapid cloth movements</li>
-  <li> Additional fire sizzle recordings</li>
+  <li>Various lit torch movement sounds</li>
+  <li>Rapid cloth movements</li>
+  <li>Additional fire sizzle recordings</li>
 </ul>
+
+<h3>Game</h3>
+<p>The Elder Scrolls V: Skyrim (2011) by Bethesda Game Studios</p>
 <br>
 <div>
   This redesign is a part of my 2024 Noisevember, Day 12: Shimmer.
 </div>
 <br>
 <div>
-    <i>Noisevember is a creative challenge hosted by airwiggles.com, where participants create and share one piece of audio every day in November.</i>
+  <i>Noisevember is a creative challenge hosted by <a href="https://www.airwiggles.com">Airwiggles</a>, where participants create and share one piece of audio every day in November.</i>
 </div>
