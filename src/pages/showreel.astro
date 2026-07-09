@@ -25,9 +25,14 @@ import { SITE_TITLE } from '../config'
 </html>
 
 <style>
+    /* Flex, not grid place-content: with an auto grid track the shell's
+       max-width:100% resolves against its own vw-sized track, so it can
+       overflow the .main-wrapper frame on narrow viewports. A flex
+       container gives max-width a definite basis (main's inner width). */
     main {
-        display: grid;
-        place-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .responsive-video {

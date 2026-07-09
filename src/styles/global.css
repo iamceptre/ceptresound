@@ -19,6 +19,20 @@
     size-adjust: 107.4%;
 }
 
+/* Registering the color tokens as <color> lets the theme crossfade animate
+   the tokens themselves on :root (see .theme-transition) — every element
+   resolves var() to the same interpolated value each frame, so text,
+   backgrounds and borders fade in lockstep. Per-element transitions of
+   var()-derived color/background-color are NOT used: Safari repaints text
+   out of sync with backgrounds when both derive from a flipped inherited
+   custom property. Browsers without @property simply swap instantly. */
+@property --cl-bg           { syntax: '<color>'; inherits: true; initial-value: hsl(0, 0%, 92%); }
+@property --cl-bg-secondary { syntax: '<color>'; inherits: true; initial-value: hsl(0, 0%, 85%); }
+@property --cl-grey-900     { syntax: '<color>'; inherits: true; initial-value: hsl(0, 0%, 80%); }
+@property --cl-grey-800     { syntax: '<color>'; inherits: true; initial-value: hsl(0, 0%, 40%); }
+@property --cl-text         { syntax: '<color>'; inherits: true; initial-value: #151515; }
+@property --cl-text-dim     { syntax: '<color>'; inherits: true; initial-value: #BDBDBD; }
+
 :root {
     color-scheme: light;
 
@@ -161,17 +175,27 @@
 /* Applied to <html> by setupThemeToggle() only for the instant of a theme
    switch, then removed — so the crossfade never interferes with the site's
    normal transitions (image fades, menu slide, hamburger morph) outside
-   that ~100ms window. !important lets it temporarily win over elements
-   that declare their own transition shorthand, giving one uniform fade. */
-.theme-transition,
+   that ~100ms window. The fade animates the registered --cl-* tokens on
+   :root (see @property at the top of this file); everything painted with
+   var() follows the interpolated tokens in the same style recalc, which
+   keeps Safari's text repaint in sync with backgrounds. Only filter still
+   transitions per element — the logo/icon invert isn't token-driven.
+   !important temporarily wins over elements that declare their own
+   transition shorthand, giving one uniform fade. */
+.theme-transition {
+    transition:
+        --cl-bg 50ms ease,
+        --cl-bg-secondary 50ms ease,
+        --cl-grey-900 50ms ease,
+        --cl-grey-800 50ms ease,
+        --cl-text 50ms ease,
+        --cl-text-dim 50ms ease !important;
+}
+
 .theme-transition *,
 .theme-transition *::before,
 .theme-transition *::after {
-    transition:
-        background-color 50ms ease,
-        color 50ms ease,
-        border-color 50ms ease,
-        filter 50ms ease !important;
+    transition: filter 50ms ease !important;
 }
 
 /* The toggle itself must not fade — its icon swaps instantly and any
